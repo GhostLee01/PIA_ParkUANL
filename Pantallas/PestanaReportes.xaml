@@ -1,0 +1,90 @@
+<UserControl x:Class="PIA_ParkUANL_Lite.PestanaReportes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:PIA_ParkUANL_Lite">
+    <ScrollViewer Background="{StaticResource Fondo}">
+        <Grid Padding="10,10,18,10" ColumnSpacing="14">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Spacing="10">
+                <!-- Vehículos olvidados -->
+                <Border Style="{StaticResource Grupo}">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="{x:Bind Vista.TituloOlvidados}" Style="{StaticResource TituloGrupo}" />
+                        <local:TablaDatos x:Name="tablaOlvidados" Height="170" Columnas="Placa,Nombre,Lugar,Cajón,Entrada,Lleva"
+                                          Filas="{x:Bind Vista.Olvidados, Mode=OneWay}" DatoSeleccionado="{x:Bind Vista.OlvidadoElegido, Mode=TwoWay}" />
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="botonCerrarEstancia" Content="Registrar salida del seleccionado" Style="{StaticResource BotonRojo}" Command="{x:Bind Vista.RegistrarSalidaDelElegidoCommand}" />
+                            <Button x:Name="botonCierreTurno" Grid.Column="1" Content="Cierre de turno" Style="{StaticResource BotonAzul}" Command="{x:Bind Vista.CerrarTurnoCommand}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Exportar reporte -->
+                <Border Style="{StaticResource Grupo}">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Exportar reporte de accesos" Style="{StaticResource TituloGrupo}" />
+                        <Grid ColumnSpacing="10" RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="110" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Desde" Style="{StaticResource EtiquetaCentrada}" />
+                            <local:SelectorFecha x:Name="selectorDesde" Grid.Column="1" Valor="{x:Bind Vista.Desde, Mode=TwoWay}" />
+                            <TextBlock Grid.Row="1" Text="Hasta" Style="{StaticResource EtiquetaCentrada}" />
+                            <local:SelectorFecha x:Name="selectorHasta" Grid.Row="1" Grid.Column="1" Valor="{x:Bind Vista.Hasta, Mode=TwoWay}" />
+                            <TextBlock Grid.Row="2" Text="Estacionamiento" Style="{StaticResource EtiquetaCentrada}" />
+                            <ComboBox x:Name="comboReporteEstacionamiento" Grid.Row="2" Grid.Column="1" Width="200" ItemsSource="{x:Bind Vista.OpcionesDeEstacionamiento}"
+                                      SelectedItem="{x:Bind Vista.EstacionamientoDelReporte, Mode=TwoWay, Converter={StaticResource ATexto}}" />
+                            <TextBlock Grid.Row="3" Text="Categoría" Style="{StaticResource EtiquetaCentrada}" />
+                            <ComboBox x:Name="comboReporteCategoria" Grid.Row="3" Grid.Column="1" Width="200" ItemsSource="{x:Bind Vista.OpcionesDeCategoria}"
+                                      SelectedItem="{x:Bind Vista.CategoriaDelReporte, Mode=TwoWay, Converter={StaticResource ATexto}}" />
+                        </Grid>
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="botonCsv" Content="Exportar CSV (Excel)" Style="{StaticResource BotonVerde}" Command="{x:Bind Vista.ExportarCsvCommand}" />
+                            <Button x:Name="botonPdf" Grid.Column="1" Content="Exportar PDF" Style="{StaticResource BotonAzul}" Command="{x:Bind Vista.ExportarPdfCommand}" />
+                        </Grid>
+                        <InfoBar x:Name="barraMensaje" IsClosable="False"
+                                 IsOpen="{x:Bind Vista.HayMensaje, Mode=OneWay}" Message="{x:Bind Vista.Mensaje, Mode=OneWay}"
+                                 Severity="{x:Bind local:Conversiones.Severidad(Vista.TipoMensaje), Mode=OneWay}" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- Pronóstico -->
+            <Border Grid.Column="1" Style="{StaticResource Grupo}" VerticalAlignment="Top">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="{x:Bind Vista.TituloDeOcupacion, Mode=OneWay}" Style="{StaticResource TituloGrupo}" />
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Estacionamiento" Style="{StaticResource EtiquetaCentrada}" />
+                        <ComboBox x:Name="comboPronosticoEstacionamiento" Width="130" ItemsSource="{x:Bind Vista.EstacionamientosDelPronostico}"
+                                  SelectedItem="{x:Bind Vista.EstacionamientoDelPronostico, Mode=TwoWay, Converter={StaticResource ATexto}}" />
+                        <TextBlock Text="Día" Style="{StaticResource EtiquetaCentrada}" />
+                        <local:SelectorFecha x:Name="selectorDiaPronostico" Valor="{x:Bind Vista.DiaDelPronostico, Mode=TwoWay}" />
+                    </StackPanel>
+                    <Border BorderBrush="{StaticResource Linea}" BorderThickness="1">
+                        <local:GraficaPronostico Height="330" Pronostico="{x:Bind Vista.Pronostico, Mode=OneWay}" />
+                    </Border>
+                    <TextBlock x:Name="etiquetaResumenPronostico" Style="{StaticResource Etiqueta}" Text="{x:Bind Vista.ResumenDelPronostico, Mode=OneWay}" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

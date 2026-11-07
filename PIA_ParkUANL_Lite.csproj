@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <Platforms>x64</Platforms>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <UseWinUI>true</UseWinUI>
+    <!-- Se ejecuta como un .exe normal: no necesita instalador MSIX ni instalar Windows App Runtime -->
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <!-- MVVMTK0045: aviso solo para Native AOT, que este proyecto no usa -->
+    <NoWarn>$(NoWarn);MVVMTK0045</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Las pruebas automáticas son un proyecto aparte -->
+    <Compile Remove="Pruebas\**" />
+    <None Remove="Pruebas\**" />
+    <EmbeddedResource Remove="Pruebas\**" />
+    <Page Remove="Pruebas\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- WinUI 3: controles y ventanas de la aplicación -->
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260921001" />
+    <!-- ML.NET: entrena el clasificador de intención de las preguntas del asistente -->
+    <PackageReference Include="Microsoft.ML" Version="4.0.0" />
+    <!-- MVVM: propiedades observables y comandos -->
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <!-- Inyección de dependencias: quién crea cada vista-modelo y sus servicios -->
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
+    <!-- Protege la clave de firma de los QR con la cuenta de Windows -->
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Preguntas de ejemplo para entrenar el modelo; se copian junto al .exe -->
+    <None Update="Entrenamiento\preguntas_entrenamiento.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,36 @@
+<Page x:Class="PIA_ParkUANL_Lite.MisVehiculosPagina"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:PIA_ParkUANL_Lite"
+      Background="{StaticResource Fondo}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <local:EncabezadoUanl Titulo="Mis vehículos" Subtitulo="{x:Bind Vista.Subtitulo}" />
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Margin="30,16,30,16" Spacing="8">
+                <Border Style="{StaticResource Grupo}" Padding="2">
+                    <ListView x:Name="listaPlacas" Height="120" SelectionMode="Single" ItemsSource="{x:Bind Vista.Placas}"
+                              SelectedItem="{x:Bind Vista.PlacaElegida, Mode=TwoWay, Converter={StaticResource ATextoOpcional}}" />
+                </Border>
+                <Button x:Name="botonQuitar" Content="Quitar el seleccionado" Style="{StaticResource BotonRojo}" Command="{x:Bind Vista.QuitarCommand}" />
+                <TextBlock Text="Placa nueva (ej. ABC-123)" Style="{StaticResource Etiqueta}" Margin="0,8,0,0" />
+                <Grid ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="110" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="cajaPlaca" CharacterCasing="Upper" MaxLength="{x:Bind local:Validaciones.LongitudMaximaPlaca}"
+                             Text="{x:Bind Vista.PlacaNueva, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button x:Name="botonAgregar" Grid.Column="1" Content="Agregar" Style="{StaticResource BotonVerde}" Command="{x:Bind Vista.AgregarCommand}" />
+                </Grid>
+                <InfoBar x:Name="barraMensaje" IsClosable="False"
+                         IsOpen="{x:Bind Vista.HayMensaje, Mode=OneWay}" Message="{x:Bind Vista.Mensaje, Mode=OneWay}"
+                         Severity="{x:Bind local:Conversiones.Severidad(Vista.TipoMensaje), Mode=OneWay}" />
+                <Button x:Name="botonCerrar" Content="Cerrar" Width="120" HorizontalAlignment="Right" Style="{StaticResource BotonGris}" Command="{x:Bind Vista.CerrarCommand}" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

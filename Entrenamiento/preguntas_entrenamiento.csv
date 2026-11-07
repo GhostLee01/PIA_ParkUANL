@@ -1,0 +1,606 @@
+Texto,Intencion
+# =====================================================================================
+#  Preguntas de ejemplo para entrenar el clasificador de intención (ML.NET).
+#  Formato: texto de la pregunta, una coma y la intención. Se separa por la ÚLTIMA coma,
+#  así que la pregunta puede llevar comas. Las líneas que empiezan con # se ignoran.
+#  Si agregas o cambias preguntas, el modelo se vuelve a entrenar solo al abrir la app
+#  (o con el botón "Reentrenar modelo" en la pestaña del asistente).
+# =====================================================================================
+# --- aforo: lugares disponibles, ocupación y capacidad ---
+¿Cuántos lugares disponibles hay?,aforo
+cuantos lugares libres quedan,aforo
+¿Hay espacio para estacionarse?,aforo
+¿Qué tan lleno está FACPYA?,aforo
+porcentaje de ocupacion del estadio,aforo
+¿Cuál es el aforo actual?,aforo
+dime la capacidad disponible,aforo
+¿Todavía hay cajones libres en FACPYA?,aforo
+estado de ocupación de los estacionamientos,aforo
+¿Está lleno el estacionamiento?,aforo
+cuanto espacio queda en el estadio,aforo
+¿Cuál es la ocupación en este momento?,aforo
+como va el semaforo de ocupacion,aforo
+¿hay cupo en el estadio?,aforo
+¿todavía cabe un carro en FACPYA?,aforo
+¿cuántos cajones quedan disponibles en FACPYA?,aforo
+nivel de ocupación actual,aforo
+¿el estadio ya se llenó?,aforo
+¿hay lugares en el estacionamiento?,aforo
+quiero saber cuanto espacio libre hay,aforo
+¿qué porcentaje está ocupado?,aforo
+capacidad efectiva de facpya,aforo
+¿cuántos lugares libres tiene el estadio?,aforo
+dime si hay estacionamiento disponible,aforo
+¿está saturado FACPYA?,aforo
+# --- comparar: qué estacionamiento conviene ---
+¿Qué estacionamiento tiene más lugares?,comparar
+¿Cuál conviene más, FACPYA o el estadio?,comparar
+¿Dónde hay más espacio?,comparar
+cual esta menos lleno,comparar
+¿A cuál estacionamiento me recomiendas ir?,comparar
+compara FACPYA contra el estadio,comparar
+¿En cuál hay más cajones libres?,comparar
+cual estacionamiento esta mas vacio,comparar
+donde me conviene estacionarme,comparar
+¿Qué lugar tiene mejor disponibilidad?,comparar
+mejor opción para estacionarse ahora,comparar
+diferencia de lugares entre facpya y estadio,comparar
+¿a dónde me voy, a FACPYA o al estadio?,comparar
+cual de los dos estacionamientos tiene menos gente,comparar
+¿en cuál encuentro lugar más rápido?,comparar
+¿dónde me estaciono, FACPYA o estadio?,comparar
+¿cuál está más desocupado?,comparar
+¿qué estacionamiento recomiendas ahorita?,comparar
+compara la ocupación de los dos estacionamientos,comparar
+¿cuál de los dos tiene más cajones disponibles?,comparar
+¿me conviene más el estadio?,comparar
+¿en dónde hay menos carros?,comparar
+cual es mejor para estacionarme ahorita,comparar
+¿qué estacionamiento tiene menos ocupación?,comparar
+recomiéndame un estacionamiento,comparar
+# --- conteo_categoria: cuántos vehículos hay adentro por categoría ---
+¿Cuántos alumnos hay adentro?,conteo_categoria
+cuantos docentes estan estacionados,conteo_categoria
+¿Cuántos visitantes hay en FACPYA?,conteo_categoria
+¿Cuántos vehículos hay en el estadio?,conteo_categoria
+cuántos carros hay ahorita,conteo_categoria
+¿Cuántos autos están dentro por categoría?,conteo_categoria
+desglose por categoria de los vehiculos,conteo_categoria
+¿Cuántos maestros hay en el estacionamiento?,conteo_categoria
+cantidad de alumnos, docentes y visitantes,conteo_categoria
+¿Hay muchos visitantes adentro?,conteo_categoria
+total de vehiculos estacionados,conteo_categoria
+número de estudiantes estacionados en FACPYA,conteo_categoria
+cuanta gente hay estacionada,conteo_categoria
+¿cuántos profes hay ahorita?,conteo_categoria
+¿cuántos coches hay dentro del estadio?,conteo_categoria
+¿cuántos docentes hay en FACPYA?,conteo_categoria
+número de visitantes estacionados,conteo_categoria
+¿cuántos vehículos hay en total adentro?,conteo_categoria
+cuantos autos de alumnos hay en el estadio,conteo_categoria
+¿cuánta gente de la comunidad está estacionada?,conteo_categoria
+conteo de vehiculos por categoria,conteo_categoria
+¿cuántos estudiantes hay estacionados en total?,conteo_categoria
+cuantos visitantes hay ahorita,conteo_categoria
+¿cuántos carros de maestros hay?,conteo_categoria
+¿cuántos vehículos están dentro de FACPYA?,conteo_categoria
+# --- ultima_entrada: el vehículo más reciente en entrar ---
+¿Cuál es la placa más reciente en haber ingresado?,ultima_entrada
+¿Quién fue el último en entrar?,ultima_entrada
+ultimo vehiculo que entro,ultima_entrada
+¿Qué auto acaba de entrar?,ultima_entrada
+la entrada más reciente,ultima_entrada
+¿Cuál fue el último carro en llegar?,ultima_entrada
+muestrame las ultimas entradas,ultima_entrada
+¿Quién acaba de ingresar al estacionamiento?,ultima_entrada
+último docente en entrar a FACPYA,ultima_entrada
+ultimas placas registradas,ultima_entrada
+¿Cuál es el registro de entrada más nuevo?,ultima_entrada
+quien llego al final,ultima_entrada
+oye, ¿quién entró hace un momento?,ultima_entrada
+¿cuál fue el coche más nuevo en llegar?,ultima_entrada
+dame la última placa que ingresó,ultima_entrada
+¿cuál fue el último ingreso?,ultima_entrada
+último auto en ingresar al estadio,ultima_entrada
+¿qué vehículo entró más recientemente?,ultima_entrada
+las cinco entradas más recientes,ultima_entrada
+¿quién llegó al último?,ultima_entrada
+ultimo visitante en entrar,ultima_entrada
+¿cuál es la última placa que entró a FACPYA?,ultima_entrada
+¿qué carro acaba de llegar?,ultima_entrada
+registro de entrada mas reciente,ultima_entrada
+¿cuál fue el último alumno en entrar?,ultima_entrada
+# --- ultima_salida: el vehículo más reciente en salir ---
+¿Quién fue el último en salir?,ultima_salida
+ultimo vehiculo que salio,ultima_salida
+¿Cuál fue la salida más reciente?,ultima_salida
+¿Qué auto acaba de salir?,ultima_salida
+muéstrame las últimas salidas,ultima_salida
+¿Quién se fue hace rato?,ultima_salida
+la ultima placa que salio del estadio,ultima_salida
+¿Cuál fue el último carro en irse?,ultima_salida
+salidas mas recientes,ultima_salida
+¿Qué vehículo salió al último?,ultima_salida
+último alumno en salir,ultima_salida
+quien acaba de retirarse del estacionamiento,ultima_salida
+dime el último coche que se fue,ultima_salida
+¿qué placa salió hace un momento?,ultima_salida
+¿cuál fue el último en retirarse del estadio?,ultima_salida
+¿cuál fue la última salida?,ultima_salida
+último auto en retirarse,ultima_salida
+¿qué vehículo se fue más recientemente?,ultima_salida
+las últimas cinco salidas,ultima_salida
+¿quién fue el último que salió de FACPYA?,ultima_salida
+ultimo docente en salir,ultima_salida
+¿qué carro acaba de irse?,ultima_salida
+salida mas reciente registrada,ultima_salida
+¿qué placa se fue al último?,ultima_salida
+¿cuál fue el último visitante en salir?,ultima_salida
+# --- primera_entrada: el primero en entrar hoy ---
+¿Quién fue el primero en entrar hoy?,primera_entrada
+primer vehiculo del dia,primera_entrada
+¿Cuál fue la primera entrada de hoy?,primera_entrada
+¿Qué auto llegó primero?,primera_entrada
+quien madrugo hoy,primera_entrada
+¿Quién llegó más temprano?,primera_entrada
+primer carro en entrar a FACPYA,primera_entrada
+la primera placa registrada hoy,primera_entrada
+¿Cuál fue el primer ingreso del día?,primera_entrada
+primer docente en llegar,primera_entrada
+¿Quién abrió el día en el estacionamiento?,primera_entrada
+el primero en llegar al estadio,primera_entrada
+¿quién llegó antes que todos hoy?,primera_entrada
+primera placa en entrar al estacionamiento,primera_entrada
+¿qué coche entró primero en la mañana?,primera_entrada
+¿cuál fue el primer vehículo en llegar hoy?,primera_entrada
+primera entrada del día en FACPYA,primera_entrada
+¿quién entró primero esta mañana?,primera_entrada
+¿qué placa llegó primero hoy?,primera_entrada
+el primer auto que entro hoy,primera_entrada
+¿quién fue el primero en ingresar al estadio?,primera_entrada
+primer alumno en entrar hoy,primera_entrada
+¿cuál fue la entrada más temprana de hoy?,primera_entrada
+¿quién llegó a primera hora?,primera_entrada
+primer ingreso registrado hoy,primera_entrada
+# --- mayor_estancia: quién lleva más tiempo estacionado ---
+¿Qué auto lleva más tiempo estacionado?,mayor_estancia
+quien lleva mas horas adentro,mayor_estancia
+¿Cuál es el vehículo con mayor estancia?,mayor_estancia
+el carro que mas tiempo lleva,mayor_estancia
+¿Quién tiene la estancia más larga?,mayor_estancia
+¿Qué alumno lleva más tiempo?,mayor_estancia
+vehiculo mas antiguo dentro,mayor_estancia
+¿Quién lleva más rato estacionado?,mayor_estancia
+mayor permanencia actual,mayor_estancia
+¿Cuál placa lleva más tiempo en FACPYA?,mayor_estancia
+el que lleva mas tiempo sin salir,mayor_estancia
+docente con más tiempo estacionado,mayor_estancia
+¿qué carro tiene más rato aquí?,mayor_estancia
+¿quién no ha salido desde hace horas?,mayor_estancia
+el coche que más tiempo lleva sin moverse,mayor_estancia
+¿qué vehículo lleva más tiempo dentro?,mayor_estancia
+auto con más horas estacionado,mayor_estancia
+¿quién lleva estacionado desde más temprano?,mayor_estancia
+¿cuál es la estancia más larga ahora mismo?,mayor_estancia
+el carro que lleva mas tiempo en el estadio,mayor_estancia
+¿quién tiene más tiempo sin salir?,mayor_estancia
+vehiculo que lleva mas rato en facpya,mayor_estancia
+¿qué visitante lleva más tiempo?,mayor_estancia
+¿cuál placa tiene la mayor permanencia?,mayor_estancia
+¿quién lleva más tiempo en el estacionamiento?,mayor_estancia
+# --- entradas_por_hora: reporte por hora y hora pico ---
+Reporte de entradas por hora,entradas_por_hora
+¿Cuántos autos entraron por hora?,entradas_por_hora
+¿Cuál fue la hora pico?,entradas_por_hora
+entradas agrupadas por hora,entradas_por_hora
+¿A qué hora entra más gente?,entradas_por_hora
+grafica de entradas por horario,entradas_por_hora
+¿En qué hora hubo más ingresos?,entradas_por_hora
+distribución de entradas por hora en FACPYA,entradas_por_hora
+horas con mas movimiento,entradas_por_hora
+¿Cuál es el horario más concurrido?,entradas_por_hora
+dame el histograma de entradas,entradas_por_hora
+reporte horario del estadio,entradas_por_hora
+¿en qué horas llega más gente?,entradas_por_hora
+¿a qué hora se llena más?,entradas_por_hora
+cantidad de entradas en cada hora,entradas_por_hora
+¿cuántas entradas hubo en cada hora?,entradas_por_hora
+hora con más entradas,entradas_por_hora
+reporte de ingresos por hora,entradas_por_hora
+¿a qué hora llegan más autos?,entradas_por_hora
+entradas por franja horaria,entradas_por_hora
+¿cuál fue la hora con más tráfico?,entradas_por_hora
+¿en qué horario hay más entradas?,entradas_por_hora
+conteo de entradas hora por hora,entradas_por_hora
+¿a qué hora es más concurrido FACPYA?,entradas_por_hora
+picos de entrada durante el día,entradas_por_hora
+# --- promedio_estancia: tiempo promedio por categoría ---
+Promedio de estancia por categoría,promedio_estancia
+¿Cuánto tiempo se quedan en promedio?,promedio_estancia
+tiempo promedio de los alumnos,promedio_estancia
+¿Cuánto dura una estancia normalmente?,promedio_estancia
+promedio de permanencia de los docentes,promedio_estancia
+¿Cuánto tiempo se quedan los visitantes?,promedio_estancia
+duracion media de las estancias,promedio_estancia
+¿Cuál es el tiempo medio de estacionamiento?,promedio_estancia
+en promedio cuanto se tardan,promedio_estancia
+estancia promedio por tipo de usuario,promedio_estancia
+¿Cuánto tiempo pasa un alumno estacionado en promedio?,promedio_estancia
+media de minutos por categoria,promedio_estancia
+¿cuánto se quedan los docentes normalmente?,promedio_estancia
+¿cuánto tiempo suele estar un visitante?,promedio_estancia
+tiempo promedio que se queda la gente,promedio_estancia
+¿cuánto tiempo en promedio se quedan los alumnos?,promedio_estancia
+promedio de estancia de los visitantes,promedio_estancia
+¿cuál es la permanencia promedio?,promedio_estancia
+tiempo medio que pasan estacionados,promedio_estancia
+¿en promedio cuánto dura un docente?,promedio_estancia
+¿cuánto tiempo se queda la gente en promedio?,promedio_estancia
+promedio de minutos estacionados,promedio_estancia
+estancia promedio general,promedio_estancia
+¿cuánto tiempo pasan en promedio en el estacionamiento?,promedio_estancia
+¿quiénes se quedan más tiempo en promedio?,promedio_estancia
+# --- movimientos_dia: entradas y salidas de hoy o de ayer ---
+¿Cuántas entradas y salidas hubo hoy?,movimientos_dia
+cuantos entraron hoy,movimientos_dia
+¿Cuántos autos salieron ayer?,movimientos_dia
+movimientos del día,movimientos_dia
+¿Cuántos ingresos hubo ayer en el estadio?,movimientos_dia
+cuantas salidas van hoy,movimientos_dia
+¿Cuántas personas llegaron hoy?,movimientos_dia
+entradas de ayer,movimientos_dia
+¿Cuánto movimiento hubo hoy en FACPYA?,movimientos_dia
+total de entradas del dia,movimientos_dia
+¿Cuántos vehículos entraron ayer?,movimientos_dia
+entradas y salidas de hoy,movimientos_dia
+¿cuántos carros han entrado hoy?,movimientos_dia
+¿cuántos se fueron ayer?,movimientos_dia
+¿cuánta gente llegó ayer a FACPYA?,movimientos_dia
+¿cuántos autos entraron hoy?,movimientos_dia
+¿cuántas salidas hubo hoy?,movimientos_dia
+entradas y salidas de ayer,movimientos_dia
+¿cuántos vehículos llegaron ayer?,movimientos_dia
+movimientos de hoy en el estadio,movimientos_dia
+¿cuánta gente salió hoy?,movimientos_dia
+¿cuántos ingresos llevamos hoy?,movimientos_dia
+total de salidas de ayer,movimientos_dia
+¿cuántos carros salieron hoy de FACPYA?,movimientos_dia
+¿cuántas personas entraron ayer?,movimientos_dia
+# --- pases_por_vencer: pases activos que expiran pronto ---
+¿Qué pases están por vencer?,pases_por_vencer
+pases que expiran pronto,pases_por_vencer
+¿Cuáles pases caducan hoy?,pases_por_vencer
+¿Hay pases a punto de expirar?,pases_por_vencer
+proximos pases en vencer,pases_por_vencer
+¿Cuándo vence el siguiente pase?,pases_por_vencer
+pases activos que vencen primero,pases_por_vencer
+¿Qué visitantes tienen el pase por caducar?,pases_por_vencer
+lista de pases cerca de expirar,pases_por_vencer
+¿Cuáles son los pases que vencen más pronto?,pases_por_vencer
+vencimiento de pases,pases_por_vencer
+pases con menos tiempo restante,pases_por_vencer
+¿qué pases se van a vencer?,pases_por_vencer
+pases que caducan en las próximas horas,pases_por_vencer
+¿a qué visitantes se les acaba el pase pronto?,pases_por_vencer
+¿qué pases vencen pronto?,pases_por_vencer
+pases que están por expirar,pases_por_vencer
+¿cuáles pases se vencen primero?,pases_por_vencer
+¿hay pases que expiren hoy?,pases_por_vencer
+pases próximos a caducar,pases_por_vencer
+¿a qué pases les queda poco tiempo?,pases_por_vencer
+lista de pases por vencer,pases_por_vencer
+¿qué pases se terminan pronto?,pases_por_vencer
+pases activos con vencimiento cercano,pases_por_vencer
+¿cuándo expiran los pases activos?,pases_por_vencer
+# --- pases_revocados: pases cancelados por el administrador ---
+¿Qué pases están revocados?,pases_revocados
+pases cancelados,pases_revocados
+¿Cuántos pases se revocaron?,pases_revocados
+lista de pases revocados,pases_revocados
+¿Hay pases dados de baja?,pases_revocados
+muestrame los pases anulados,pases_revocados
+¿Qué visitantes tienen el pase revocado?,pases_revocados
+pases invalidados,pases_revocados
+¿Se revocó algún pase?,pases_revocados
+pases que ya no sirven por revocacion,pases_revocados
+revocaciones de pases,pases_revocados
+¿Cuáles pases fueron cancelados por el administrador?,pases_revocados
+¿hay pases cancelados?,pases_revocados
+pases que fueron revocados por el admin,pases_revocados
+¿qué pases ya no son válidos porque se revocaron?,pases_revocados
+¿cuáles pases se cancelaron?,pases_revocados
+pases revocados,pases_revocados
+¿hay pases revocados?,pases_revocados
+lista de pases cancelados por el administrador,pases_revocados
+¿qué pases fueron anulados?,pases_revocados
+¿cuántos pases están revocados?,pases_revocados
+pases dados de baja,pases_revocados
+¿se canceló algún pase de visitante?,pases_revocados
+muestra los pases revocados,pases_revocados
+¿qué visitantes perdieron su pase?,pases_revocados
+# --- vehiculos_evento: vehículos de eventos que están adentro ---
+¿Cuántos vehículos del congreso hay adentro?,vehiculos_evento
+autos del evento estacionados,vehiculos_evento
+¿Cuántos visitantes del evento están dentro?,vehiculos_evento
+carros del congreso en FACPYA,vehiculos_evento
+¿Cuántos cajones reservados están ocupados?,vehiculos_evento
+vehiculos de eventos adentro,vehiculos_evento
+¿Qué placas son del evento?,vehiculos_evento
+ocupación de cajones reservados del congreso,vehiculos_evento
+¿Cuántos asistentes al evento ya llegaron en auto?,vehiculos_evento
+lugares reservados ocupados por el evento,vehiculos_evento
+¿Hay autos del partido estacionados?,vehiculos_evento
+quienes vinieron al congreso en carro,vehiculos_evento
+¿cuántos del congreso están adentro?,vehiculos_evento
+¿cuántos carros del evento ya llegaron?,vehiculos_evento
+vehículos de visitantes del congreso en el estacionamiento,vehiculos_evento
+¿cuántos autos del congreso hay estacionados?,vehiculos_evento
+vehículos de asistentes al evento,vehiculos_evento
+¿cuántos cajones del evento están ocupados?,vehiculos_evento
+¿cuántos visitantes del congreso llegaron en carro?,vehiculos_evento
+autos del evento en FACPYA,vehiculos_evento
+¿cuántos lugares reservados se ocupan ahorita?,vehiculos_evento
+¿qué placas pertenecen al congreso?,vehiculos_evento
+vehiculos de eventos estacionados,vehiculos_evento
+¿cuántos carros del partido hay?,vehiculos_evento
+ocupación de los cajones del evento,vehiculos_evento
+# --- estado_eventos: eventos, vigencia y cupo de pases ---
+¿Cómo están los eventos?,estado_eventos
+estado de los eventos,estado_eventos
+¿Qué eventos hay activos?,estado_eventos
+¿Cuántos pases tiene el congreso?,estado_eventos
+cupo de visitantes del evento,estado_eventos
+¿Qué eventos están vigentes?,estado_eventos
+eventos programados,estado_eventos
+¿Cómo va el cupo del congreso?,estado_eventos
+informacion de los eventos,estado_eventos
+¿Cuántos lugares reserva el congreso?,estado_eventos
+lista de eventos y pases,estado_eventos
+¿Cuál es el porcentaje de cupo del partido?,estado_eventos
+¿qué eventos hay?,estado_eventos
+¿cómo va el congreso?,estado_eventos
+eventos con pases disponibles,estado_eventos
+¿qué eventos están registrados?,estado_eventos
+estado de los eventos activos,estado_eventos
+¿cuántos pases quedan para el congreso?,estado_eventos
+¿qué eventos hay esta semana?,estado_eventos
+cupo del evento,estado_eventos
+¿cuál es el estado del partido?,estado_eventos
+¿cómo van los pases del evento?,estado_eventos
+información del congreso,estado_eventos
+¿qué eventos ya terminaron?,estado_eventos
+¿cuántos visitantes acepta el congreso?,estado_eventos
+# --- buscar_nombre: buscar a una persona por su nombre ---
+Busca a Roberto Martínez,buscar_nombre
+¿Dónde está Ana Garza?,buscar_nombre
+buscar a Luis Pérez,buscar_nombre
+¿Está adentro María González?,buscar_nombre
+encuentra a Jorge Ramírez,buscar_nombre
+¿En qué cajón está Sofía Salinas?,buscar_nombre
+busca la persona llamada Diego Treviño,buscar_nombre
+¿Vino hoy Fernanda Leal?,buscar_nombre
+quiero encontrar a Carlos Cantu,buscar_nombre
+¿Dónde estacionó Valeria Flores?,buscar_nombre
+localiza a Hector Villarreal,buscar_nombre
+¿Está estacionado Ricardo Guerra?,buscar_nombre
+¿anda por aquí Luis Garza?,buscar_nombre
+búscame a Paola Treviño,buscar_nombre
+¿sabes si llegó Miguel Hernández?,buscar_nombre
+¿está Ana Garza en el estacionamiento?,buscar_nombre
+busca a Jorge Elizondo,buscar_nombre
+¿dónde dejó su carro Roberto Martínez?,buscar_nombre
+encuentra a la persona Lucía Cantú,buscar_nombre
+¿Andrea Flores ya llegó?,buscar_nombre
+búsqueda por nombre de Raúl Guerra,buscar_nombre
+¿dónde está estacionada Mariana Salinas?,buscar_nombre
+¿anda Eduardo Leal por aquí?,buscar_nombre
+localiza a José Rodríguez,buscar_nombre
+¿en qué cajón quedó Paola Sánchez?,buscar_nombre
+# --- resumen: panorama general ---
+Dame un resumen,resumen
+resumen general,resumen
+¿Cómo va todo?,resumen
+¿Cuál es la situación actual?,resumen
+estado general del sistema,resumen
+dame un panorama,resumen
+¿Cómo están los estacionamientos?,resumen
+reporte general,resumen
+informe del dia,resumen
+¿Qué está pasando ahorita?,resumen
+resumen de hoy,resumen
+estatus general,resumen
+¿cómo estamos hoy?,resumen
+dame la foto general del estacionamiento,resumen
+¿qué tal va el día en los estacionamientos?,resumen
+resumen del estacionamiento,resumen
+¿cómo está todo ahorita?,resumen
+dame un resumen rápido,resumen
+¿cuál es el panorama general?,resumen
+informe general de hoy,resumen
+¿qué tal está la situación?,resumen
+resumen de los dos estacionamientos,resumen
+estado general de hoy,resumen
+¿cómo vamos?,resumen
+reporte rápido del día,resumen
+# --- saludo ---
+hola,saludo
+Hola, buenos días,saludo
+buenas tardes,saludo
+buenas noches,saludo
+que tal,saludo
+hey,saludo
+¿Qué onda?,saludo
+hola asistente,saludo
+saludos,saludo
+buen día,saludo
+holi,saludo
+¿Cómo estás?,saludo
+buenas,saludo
+qué onda asistente,saludo
+hola, ¿qué tal?,saludo
+hola buenas,saludo
+buenos días,saludo
+qué tal asistente,saludo
+hola, ¿cómo estás?,saludo
+buenas, ¿qué tal?,saludo
+hola hola,saludo
+saludos asistente,saludo
+hey qué tal,saludo
+buen día asistente,saludo
+buenas tardes asistente,saludo
+# --- agradecimiento ---
+gracias,agradecimiento
+muchas gracias,agradecimiento
+te lo agradezco,agradecimiento
+gracias por la información,agradecimiento
+mil gracias,agradecimiento
+excelente, gracias,agradecimiento
+perfecto gracias,agradecimiento
+muy amable,agradecimiento
+gracias asistente,agradecimiento
+ok gracias,agradecimiento
+te pasaste, gracias,agradecimiento
+listo, gracias,agradecimiento
+muchas gracias!,agradecimiento
+gracias, eso era todo,agradecimiento
+va, gracias,agradecimiento
+gracias amigo,agradecimiento
+muchas gracias asistente,agradecimiento
+gracias, muy útil,agradecimiento
+te agradezco la ayuda,agradecimiento
+gracias por responder,agradecimiento
+perfecto, muchas gracias,agradecimiento
+gracias, me sirvió,agradecimiento
+ok, mil gracias,agradecimiento
+excelente, te agradezco,agradecimiento
+gracias por tu ayuda,agradecimiento
+# --- ayuda ---
+ayuda,ayuda
+¿Qué puedo preguntarte?,ayuda
+¿Qué sabes hacer?,ayuda
+¿Cómo te uso?,ayuda
+dame ejemplos de preguntas,ayuda
+necesito ayuda,ayuda
+¿Qué preguntas aceptas?,ayuda
+opciones disponibles,ayuda
+instrucciones,ayuda
+¿Para qué sirves?,ayuda
+no se que preguntar,ayuda
+menú de ayuda,ayuda
+¿qué puedes hacer?,ayuda
+¿cómo funcionas?,ayuda
+¿qué cosas te puedo preguntar?,ayuda
+¿qué puedo consultar?,ayuda
+muéstrame ejemplos,ayuda
+¿cómo funciona el asistente?,ayuda
+¿qué información tienes?,ayuda
+ayuda por favor,ayuda
+¿qué preguntas puedo hacer?,ayuda
+no entiendo cómo usarte,ayuda
+¿qué comandos hay?,ayuda
+explícame qué haces,ayuda
+¿con qué me puedes ayudar?,ayuda
+
+# ---------- pronostico (ocupación estimada a futuro) ----------
+¿cómo estará FACPYA mañana?,pronostico
+¿cómo va a estar el estadio mañana a las 10?,pronostico
+pronóstico de ocupación,pronostico
+pronóstico para mañana,pronostico
+¿cuál será la hora pico de mañana?,pronostico
+¿a qué hora se va a llenar FACPYA?,pronostico
+¿qué tan lleno estará el estacionamiento el lunes?,pronostico
+¿cuántos autos habrá mañana a las 9?,pronostico
+¿cuántos vehículos se esperan el viernes?,pronostico
+¿cómo estará el estacionamiento el viernes a las 12?,pronostico
+predicción de ocupación para el martes,pronostico
+¿va a haber lugar mañana en la mañana?,pronostico
+¿habrá espacio el miércoles a las 8?,pronostico
+¿a qué hora conviene llegar mañana?,pronostico
+estimación de ocupación del estadio,pronostico
+¿qué ocupación se espera el jueves?,pronostico
+¿estará lleno FACPYA el lunes a las 11?,pronostico
+¿cómo se ve el estacionamiento para mañana?,pronostico
+¿cuál es la ocupación esperada a las 10?,pronostico
+¿qué tan ocupado estará el sábado?,pronostico
+pronostica la ocupación de FACPYA,pronostico
+¿qué esperas de ocupación para pasado mañana?,pronostico
+¿cuándo estará más lleno mañana?,pronostico
+¿a qué hora habrá menos autos mañana?,pronostico
+¿se llenará el estadio el domingo?,pronostico
+
+# ---------- vehiculos_olvidados (estancias demasiado largas) ----------
+¿hay vehículos olvidados?,vehiculos_olvidados
+¿qué autos están olvidados?,vehiculos_olvidados
+vehículos olvidados,vehiculos_olvidados
+autos abandonados en el estacionamiento,vehiculos_olvidados
+¿hay carros abandonados?,vehiculos_olvidados
+¿qué autos llevan más de 12 horas?,vehiculos_olvidados
+¿qué vehículos llevan más de un día?,vehiculos_olvidados
+¿alguien dejó su carro toda la noche?,vehiculos_olvidados
+¿qué autos se quedaron desde ayer?,vehiculos_olvidados
+vehículos que no han salido desde ayer,vehiculos_olvidados
+alertas de estancia larga,vehiculos_olvidados
+¿hay estancias demasiado largas?,vehiculos_olvidados
+lista de autos sin salida registrada,vehiculos_olvidados
+¿cuántos carros olvidaron?,vehiculos_olvidados
+¿qué placas llevan demasiado tiempo?,vehiculos_olvidados
+¿hay alertas de vehículos?,vehiculos_olvidados
+¿hay autos pendientes de salida?,vehiculos_olvidados
+carros que se quedaron a dormir,vehiculos_olvidados
+¿quién no marcó salida?,vehiculos_olvidados
+¿algún vehículo lleva días aquí?,vehiculos_olvidados
+autos olvidados en FACPYA,vehiculos_olvidados
+vehículos abandonados en el estadio,vehiculos_olvidados
+¿cuáles autos llevan más de doce horas adentro?,vehiculos_olvidados
+¿qué debo revisar en el cierre de turno?,vehiculos_olvidados
+¿hay algo pendiente para el cierre?,vehiculos_olvidados
+
+# ---------- fuera_de_dominio (preguntas que el sistema no puede contestar) ----------
+¿qué clima hace?,fuera_de_dominio
+¿va a llover hoy?,fuera_de_dominio
+¿qué temperatura hace en Monterrey?,fuera_de_dominio
+¿quién es el rector?,fuera_de_dominio
+¿quién es el presidente de México?,fuera_de_dominio
+¿quién ganó el partido de ayer?,fuera_de_dominio
+¿cuánto cuesta el estacionamiento?,fuera_de_dominio
+¿cuál es el precio por hora?,fuera_de_dominio
+¿cuánto debo pagar?,fuera_de_dominio
+¿aceptan tarjeta?,fuera_de_dominio
+¿dónde puedo pagar mi multa?,fuera_de_dominio
+dame la contraseña del admin,fuera_de_dominio
+¿cuál es la contraseña del operador?,fuera_de_dominio
+muéstrame la clave secreta,fuera_de_dominio
+cuéntame un chiste,fuera_de_dominio
+escribe un poema,fuera_de_dominio
+hazme la tarea,fuera_de_dominio
+resuelve esta ecuación,fuera_de_dominio
+¿cuánto es dos más dos?,fuera_de_dominio
+traduce esto al inglés,fuera_de_dominio
+¿qué hora es en Japón?,fuera_de_dominio
+¿cuál es la capital de Francia?,fuera_de_dominio
+¿dónde queda la biblioteca?,fuera_de_dominio
+¿a qué hora abre la cafetería?,fuera_de_dominio
+¿qué hay de comer en la cafetería?,fuera_de_dominio
+¿cuál es mi promedio de la carrera?,fuera_de_dominio
+¿cuándo son los exámenes?,fuera_de_dominio
+¿cuándo inicia el semestre?,fuera_de_dominio
+¿cuántos alumnos tiene la UANL?,fuera_de_dominio
+¿cuántas facultades hay en la universidad?,fuera_de_dominio
+¿cuál es tu color favorito?,fuera_de_dominio
+¿quién te creó?,fuera_de_dominio
+¿eres una persona?,fuera_de_dominio
+recomiéndame una película,fuera_de_dominio
+¿qué música te gusta?,fuera_de_dominio
+¿cómo llego al centro de la ciudad?,fuera_de_dominio
+¿cómo se reinicia la computadora?,fuera_de_dominio
+borra todos los registros,fuera_de_dominio
+¿qué noticias hay?,fuera_de_dominio
+¿cuánto vale el dólar?,fuera_de_dominio
+
+# ---------- mayor_estancia: estancias de días pasados ----------
+¿qué auto duró más ayer?,mayor_estancia
+¿quién duró más tiempo el lunes?,mayor_estancia
+¿cuál fue la estancia más larga de ayer?,mayor_estancia
+estancia más larga del 30 de octubre,mayor_estancia
+¿quién se quedó más tiempo ayer?,mayor_estancia
+¿qué vehículo estuvo más tiempo ayer?,mayor_estancia

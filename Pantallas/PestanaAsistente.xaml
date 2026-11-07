@@ -1,0 +1,72 @@
+<UserControl x:Class="PIA_ParkUANL_Lite.PestanaAsistente"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:PIA_ParkUANL_Lite">
+    <Grid Background="{StaticResource Fondo}" Padding="10" ColumnSpacing="14">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="360" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Pregunta e historial del chat -->
+        <Grid RowSpacing="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Escribe tu pregunta y presiona Enter:" Style="{StaticResource Etiqueta}" />
+            <Grid Grid.Row="1" ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="110" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="cajaPregunta" MaxLength="{x:Bind local:AsistenteVistaModelo.LongitudMaximaPregunta}"
+                         Text="{x:Bind Vista.Pregunta, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Button x:Name="botonEnviar" Grid.Column="1" Content="Enviar" Style="{StaticResource BotonAzul}" VerticalAlignment="Stretch" Command="{x:Bind Vista.EnviarCommand}" />
+            </Grid>
+            <Border Grid.Row="2" Style="{StaticResource Grupo}">
+                <ScrollViewer x:Name="desplazamientoChat" VerticalScrollBarVisibility="Visible">
+                    <ItemsControl ItemsSource="{x:Bind Vista.Chat}" Margin="0,0,14,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="local:MensajeDeChat">
+                                <StackPanel Margin="0,0,0,12">
+                                    <TextBlock Text="{x:Bind Autor}" FontFamily="Consolas" FontSize="13" FontWeight="Bold" TextWrapping="Wrap"
+                                               Foreground="{x:Bind local:Conversiones.ColorDeAutor(Tipo)}" />
+                                    <TextBlock Text="{x:Bind Texto}" FontFamily="Consolas" FontSize="13" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <!-- Preguntas rápidas y modelo -->
+        <ScrollViewer Grid.Column="1">
+            <StackPanel Spacing="10" Margin="0,0,12,0">
+                <Border Style="{StaticResource Grupo}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="Preguntas rápidas" Style="{StaticResource TituloGrupo}" />
+                        <ItemsControl ItemsSource="{x:Bind Vista.Sugerencias}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                    <Button Content="{x:Bind}" Style="{StaticResource BotonOro}" HorizontalContentAlignment="Left" FontWeight="Normal"
+                                            Margin="0,0,0,6" Click="AlElegirSugerencia" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Grupo}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="Modelo entrenado (ML.NET)" Style="{StaticResource TituloGrupo}" />
+                        <TextBlock x:Name="etiquetaMetricasModelo" Style="{StaticResource Etiqueta}" Text="{x:Bind Vista.Metricas, Mode=OneWay}"
+                                   Foreground="{x:Bind local:Conversiones.ColorDeAlerta(Vista.MetricasConError), Mode=OneWay}" />
+                        <Button x:Name="botonReentrenar" Style="{StaticResource BotonOro}" Content="{x:Bind Vista.TextoBotonReentrenar, Mode=OneWay}" Command="{x:Bind Vista.ReentrenarCommand}" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

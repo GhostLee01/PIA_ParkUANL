@@ -1,0 +1,126 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:PIA_ParkUANL_Lite">
+
+    <local:ConvertidorDeTexto x:Key="ATexto" />
+    <local:ConvertidorDeTextoOpcional x:Key="ATextoOpcional" />
+
+    <!-- Ningún campo de la app puede empezar con un espacio, un tabulador o un carácter invisible -->
+    <Style TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}">
+        <Setter Property="local:CampoSinVacioInicial.Activo" Value="True" />
+    </Style>
+    <Style TargetType="PasswordBox" BasedOn="{StaticResource DefaultPasswordBoxStyle}">
+        <Setter Property="local:CampoSinVacioInicial.Activo" Value="True" />
+    </Style>
+
+    <!-- TEMA VISUAL UANL: colores y estilos para que todas las pantallas se vean igual -->
+    <SolidColorBrush x:Key="AzulUanl" Color="#003057" />
+    <SolidColorBrush x:Key="OroUanl" Color="#F2A900" />
+    <SolidColorBrush x:Key="Verde" Color="#2E7D32" />
+    <SolidColorBrush x:Key="Rojo" Color="#C62828" />
+    <SolidColorBrush x:Key="Fondo" Color="#F4F6F9" />
+    <SolidColorBrush x:Key="GrisTexto" Color="#555555" />
+    <SolidColorBrush x:Key="FilaAlterna" Color="#EEF2F7" />
+    <SolidColorBrush x:Key="Blanco" Color="White" />
+    <SolidColorBrush x:Key="Linea" Color="#C0C0C0" />
+    <SolidColorBrush x:Key="BarraVacia" Color="#DCDCDC" />
+
+    <Style x:Key="Etiqueta" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource GrisTexto}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style x:Key="EtiquetaCentrada" TargetType="TextBlock" BasedOn="{StaticResource Etiqueta}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="Mensaje" TargetType="TextBlock" BasedOn="{StaticResource Etiqueta}">
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{StaticResource Rojo}" />
+        <!-- Sin esto, ✖ y ✔ se dibujan como emoji de color y no con el color del mensaje -->
+        <Setter Property="IsColorFontEnabled" Value="False" />
+    </Style>
+
+    <Style x:Key="TituloGrupo" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AzulUanl}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="0,0,0,8" />
+    </Style>
+
+    <!-- Tarjeta blanca que agrupa controles -->
+    <Style x:Key="Grupo" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource Blanco}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Linea}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="Padding" Value="14,10" />
+    </Style>
+
+    <!-- Botón plano: el color se conserva al pasar el cursor; solo cambia su opacidad -->
+    <Style x:Key="BotonUanl" TargetType="Button">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Padding" Value="10,7" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="UseSystemFocusVisuals" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="Raiz" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="Raiz.Opacity" Value="0.88" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="Raiz.Opacity" Value="0.72" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Target="Raiz.Opacity" Value="0.5" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter Padding="{TemplateBinding Padding}"
+                                          HorizontalAlignment="Stretch"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Foreground="{TemplateBinding Foreground}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BotonAzul" TargetType="Button" BasedOn="{StaticResource BotonUanl}">
+        <Setter Property="Background" Value="{StaticResource AzulUanl}" />
+    </Style>
+    <Style x:Key="BotonOro" TargetType="Button" BasedOn="{StaticResource BotonUanl}">
+        <Setter Property="Background" Value="{StaticResource OroUanl}" />
+        <Setter Property="Foreground" Value="{StaticResource AzulUanl}" />
+    </Style>
+    <Style x:Key="BotonVerde" TargetType="Button" BasedOn="{StaticResource BotonUanl}">
+        <Setter Property="Background" Value="{StaticResource Verde}" />
+    </Style>
+    <Style x:Key="BotonRojo" TargetType="Button" BasedOn="{StaticResource BotonUanl}">
+        <Setter Property="Background" Value="{StaticResource Rojo}" />
+    </Style>
+    <Style x:Key="BotonGris" TargetType="Button" BasedOn="{StaticResource BotonUanl}">
+        <Setter Property="Background" Value="{StaticResource GrisTexto}" />
+    </Style>
+
+</ResourceDictionary>

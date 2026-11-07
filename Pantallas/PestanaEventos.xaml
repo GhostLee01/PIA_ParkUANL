@@ -1,0 +1,140 @@
+<UserControl x:Class="PIA_ParkUANL_Lite.PestanaEventos"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:PIA_ParkUANL_Lite">
+    <ScrollViewer Background="{StaticResource Fondo}">
+        <Grid Padding="10,10,18,10" ColumnSpacing="14" RowSpacing="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="170" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <local:TablaDatos x:Name="tablaEventos" Columnas="Código,Título,Inicio,Fin,Estado,Cajones,Pases,% Cupo"
+                              Filas="{x:Bind Vista.Eventos, Mode=OneWay}" DatoSeleccionado="{x:Bind Vista.EventoElegido, Mode=TwoWay}" />
+            <local:TablaDatos x:Name="tablaPases" Grid.Column="1" Columnas="Id,Visitante,Placa,Emisión,Expira,Estado"
+                              Filas="{x:Bind Vista.Pases, Mode=OneWay}" DatoSeleccionado="{x:Bind Vista.PaseElegido, Mode=TwoWay}" />
+
+            <InfoBar x:Name="barraMensaje" Grid.Row="1" Grid.ColumnSpan="2" IsClosable="False"
+                     IsOpen="{x:Bind Vista.HayMensaje, Mode=OneWay}" Message="{x:Bind Vista.Mensaje, Mode=OneWay}"
+                     Severity="{x:Bind local:Conversiones.Severidad(Vista.TipoMensaje), Mode=OneWay}" />
+
+            <!-- Datos del evento -->
+            <Border Grid.Row="2" Style="{StaticResource Grupo}">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Datos del evento" Style="{StaticResource TituloGrupo}" />
+                    <Grid ColumnSpacing="10" RowSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="160" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Código" Style="{StaticResource EtiquetaCentrada}" />
+                        <TextBox x:Name="cajaCodigo" Grid.Column="1" MaxLength="{x:Bind local:Validaciones.LongitudMaximaCodigoEvento}" IsReadOnly="{x:Bind Vista.CodigoSoloLectura, Mode=OneWay}"
+                                 Text="{x:Bind Vista.Codigo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Grid.Row="1" Text="Título" Style="{StaticResource EtiquetaCentrada}" />
+                        <TextBox x:Name="cajaTitulo" Grid.Row="1" Grid.Column="1" MaxLength="{x:Bind local:Validaciones.LongitudMaximaNombre}"
+                                 Text="{x:Bind Vista.Titulo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Grid.Row="2" Text="Ubicación" Style="{StaticResource EtiquetaCentrada}" />
+                        <TextBox x:Name="cajaUbicacion" Grid.Row="2" Grid.Column="1" MaxLength="{x:Bind local:Validaciones.LongitudMaximaNombre}"
+                                 Text="{x:Bind Vista.Ubicacion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Grid.Row="3" Text="Inicio" Style="{StaticResource EtiquetaCentrada}" />
+                        <local:SelectorFecha x:Name="selectorInicio" Grid.Row="3" Grid.Column="1" MostrarHora="True" Valor="{x:Bind Vista.Inicio, Mode=TwoWay}" />
+                        <TextBlock Grid.Row="4" Text="Fin" Style="{StaticResource EtiquetaCentrada}" />
+                        <local:SelectorFecha x:Name="selectorFin" Grid.Row="4" Grid.Column="1" MostrarHora="True" Valor="{x:Bind Vista.Fin, Mode=TwoWay}" />
+                        <TextBlock Grid.Row="5" Text="Cajones reservados FACPYA" Style="{StaticResource EtiquetaCentrada}" />
+                        <NumberBox x:Name="numeroReservados" local:CampoSinVacioInicial.Activo="True" Grid.Row="5" Grid.Column="1" SpinButtonPlacementMode="Inline" Width="150" HorizontalAlignment="Left"
+                                   Minimum="0" Maximum="{x:Bind Vista.LimiteReservados}" Value="{x:Bind Vista.Reservados, Mode=TwoWay}" />
+                        <TextBlock Grid.Row="6" Text="Máx. visitantes" Style="{StaticResource EtiquetaCentrada}" />
+                        <NumberBox x:Name="numeroMaxVisitantes" local:CampoSinVacioInicial.Activo="True" Grid.Row="6" Grid.Column="1" SpinButtonPlacementMode="Inline" Width="150" HorizontalAlignment="Left"
+                                   Minimum="{x:Bind Vista.MinimoVisitantes}" Maximum="{x:Bind Vista.LimiteVisitantes}" Value="{x:Bind Vista.MaximoVisitantes, Mode=TwoWay}" />
+                        <TextBlock Grid.Row="7" Text="Vigencia del pase (horas)" Style="{StaticResource EtiquetaCentrada}" />
+                        <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" Spacing="14">
+                            <NumberBox x:Name="numeroVigencia" local:CampoSinVacioInicial.Activo="True" SpinButtonPlacementMode="Inline" Width="150"
+                                       Minimum="{x:Bind Vista.MinimoVigencia}" Maximum="{x:Bind Vista.LimiteVigencia}" Value="{x:Bind Vista.VigenciaHoras, Mode=TwoWay}" />
+                            <CheckBox x:Name="casillaReingreso" Content="El pase permite reingresar" IsChecked="{x:Bind Vista.PermiteReingreso, Mode=TwoWay}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid ColumnSpacing="6" Margin="0,6,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="7*" />
+                            <ColumnDefinition Width="4*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="botonNuevo" Content="Nuevo" Style="{StaticResource BotonGris}" Padding="2,7" Command="{x:Bind Vista.LimpiarEditorCommand}" />
+                        <Button x:Name="botonCrear" Grid.Column="1" Content="Crear evento" Style="{StaticResource BotonVerde}" Padding="2,7" Command="{x:Bind Vista.CrearEventoCommand}" />
+                        <Button x:Name="botonGuardar" Grid.Column="2" Content="Guardar cambios" Style="{StaticResource BotonAzul}" Padding="2,7" Command="{x:Bind Vista.GuardarCambiosCommand}" />
+                        <Button x:Name="botonActivar" Grid.Column="3" Content="Activar/Desactivar" Style="{StaticResource BotonOro}" Padding="2,7" Command="{x:Bind Vista.CambiarEstadoCommand}" />
+                        <Button x:Name="botonEliminar" Grid.Column="4" Content="Eliminar" Style="{StaticResource BotonRojo}" Padding="2,7" Command="{x:Bind Vista.EliminarEventoCommand}" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Pase de visitante del evento seleccionado -->
+            <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource Grupo}">
+                <Grid ColumnSpacing="14">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="190" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Pase de visitante" Style="{StaticResource TituloGrupo}" />
+                        <Grid ColumnSpacing="10" RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Nombre" Style="{StaticResource EtiquetaCentrada}" />
+                            <TextBox x:Name="cajaPaseNombre" Grid.Column="1" MaxLength="{x:Bind local:Validaciones.LongitudMaximaNombre}"
+                                     Text="{x:Bind Vista.NombreVisitante, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Grid.Row="1" Text="Correo" Style="{StaticResource EtiquetaCentrada}" />
+                            <TextBox x:Name="cajaPaseCorreo" Grid.Row="1" Grid.Column="1" MaxLength="{x:Bind local:Validaciones.LongitudMaximaCorreo}"
+                                     Text="{x:Bind Vista.CorreoVisitante, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Grid.Row="2" Text="Placa" Style="{StaticResource EtiquetaCentrada}" />
+                            <TextBox x:Name="cajaPasePlaca" Grid.Row="2" Grid.Column="1" CharacterCasing="Upper" MaxLength="{x:Bind local:Validaciones.LongitudMaximaPlaca}"
+                                     Text="{x:Bind Vista.PlacaVisitante, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                        <Button x:Name="botonEmitir" Content="Emitir pase" Style="{StaticResource BotonVerde}" Command="{x:Bind Vista.EmitirPaseCommand}" />
+                        <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="botonRevocar" Content="Revocar pase" Style="{StaticResource BotonOro}" Command="{x:Bind Vista.RevocarPaseCommand}" />
+                            <Button x:Name="botonEliminarPase" Grid.Column="1" Content="Eliminar pase" Style="{StaticResource BotonRojo}" Command="{x:Bind Vista.EliminarPaseCommand}" />
+                        </Grid>
+                        <TextBlock Text="Texto del QR (para pegarlo en la caseta):" Style="{StaticResource Etiqueta}" />
+                        <TextBox x:Name="cajaQrPase" IsReadOnly="True" TextWrapping="Wrap" Height="86" Text="{x:Bind Vista.CodigoDelPase, Mode=OneWay}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Spacing="8">
+                        <Border Background="{StaticResource Blanco}" BorderBrush="{StaticResource Linea}" BorderThickness="1" Margin="0,30,0,0">
+                            <Image x:Name="imagenQrPase" Width="186" Height="186" Stretch="Uniform" Source="{x:Bind local:Conversiones.ImagenDeQr(Vista.ImagenDelPase), Mode=OneWay}" />
+                        </Border>
+                        <Button x:Name="botonCopiar" Content="Copiar texto" Style="{StaticResource BotonAzul}" Command="{x:Bind Vista.CopiarCodigoCommand}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

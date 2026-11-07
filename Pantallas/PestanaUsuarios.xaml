@@ -1,0 +1,58 @@
+<UserControl x:Class="PIA_ParkUANL_Lite.PestanaUsuarios"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:PIA_ParkUANL_Lite">
+    <Grid Background="{StaticResource Fondo}" Padding="10" ColumnSpacing="14">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="370" />
+        </Grid.ColumnDefinitions>
+
+        <Grid RowSpacing="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Buscar" Style="{StaticResource EtiquetaCentrada}" />
+                <TextBox x:Name="cajaBuscarUsuario" Grid.Column="1" Text="{x:Bind Vista.Busqueda, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Grid.Column="2" Text="Mostrar" Style="{StaticResource EtiquetaCentrada}" />
+                <ComboBox x:Name="comboMostrarUsuarios" Grid.Column="3" HorizontalAlignment="Stretch" ItemsSource="{x:Bind Vista.OpcionesDeMostrar}"
+                          SelectedItem="{x:Bind Vista.Mostrar, Mode=TwoWay, Converter={StaticResource ATexto}}" />
+                <TextBlock x:Name="etiquetaConteoUsuarios" Grid.Column="4" Style="{StaticResource EtiquetaCentrada}" Text="{x:Bind Vista.Conteo, Mode=OneWay}" />
+            </Grid>
+            <local:TablaDatos x:Name="tablaUsuarios" Grid.Row="1" Columnas="Correo,Nombre,Categoría,Matrícula,Placas,Rol,Estado"
+                              Filas="{x:Bind Vista.Filas, Mode=OneWay}" DatoSeleccionado="{x:Bind Vista.PersonaElegida, Mode=TwoWay}" />
+        </Grid>
+
+        <ScrollViewer Grid.Column="1">
+            <StackPanel Spacing="10" Margin="0,0,12,0">
+                <Border Style="{StaticResource Grupo}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="Permisos" Style="{StaticResource TituloGrupo}" />
+                        <TextBlock Text="Correo universitario de la cuenta" Style="{StaticResource Etiqueta}" />
+                        <TextBox x:Name="cajaCorreoPermiso" MaxLength="{x:Bind local:Validaciones.LongitudMaximaCorreo}"
+                                 Text="{x:Bind Vista.CorreoPermiso, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Text="Rol" Style="{StaticResource Etiqueta}" />
+                        <ComboBox x:Name="comboRolPermiso" HorizontalAlignment="Stretch" ItemsSource="{x:Bind Vista.RolesDisponibles}"
+                                  SelectedItem="{x:Bind Vista.RolPermiso, Mode=TwoWay, Converter={StaticResource ATexto}}" />
+                        <Button x:Name="botonAsignar" Content="Asignar rol" Style="{StaticResource BotonAzul}" Margin="0,6,0,0" Command="{x:Bind Vista.AsignarRolCommand}" />
+                        <Button x:Name="botonActivar" Content="Activar / Desactivar cuenta" Style="{StaticResource BotonOro}" Command="{x:Bind Vista.CambiarEstadoCommand}" />
+                        <Button x:Name="botonRestablecer" Content="Restablecer contraseña" Style="{StaticResource BotonGris}" Command="{x:Bind Vista.RestablecerContrasenaCommand}" />
+                        <InfoBar x:Name="barraMensaje" IsClosable="False"
+                                 IsOpen="{x:Bind Vista.HayMensaje, Mode=OneWay}" Message="{x:Bind Vista.Mensaje, Mode=OneWay}"
+                                 Severity="{x:Bind local:Conversiones.Severidad(Vista.TipoMensaje), Mode=OneWay}" />
+                    </StackPanel>
+                </Border>
+                <TextBlock x:Name="etiquetaReglas" Style="{StaticResource Etiqueta}" Text="{x:Bind Vista.Reglas}" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -1,0 +1,38 @@
+<Page x:Class="PIA_ParkUANL_Lite.DashboardPagina"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:PIA_ParkUANL_Lite"
+      Background="{StaticResource Fondo}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <local:EncabezadoUanl Titulo="Panel de control" Subtitulo="{x:Bind Vista.Subtitulo}" ComandoCuenta="{x:Bind Vista.CambiarContrasenaCommand}" />
+
+        <Grid Grid.Row="1" Margin="16,10,16,6" ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="130" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="botonCaseta" Content="Abrir caseta" Style="{StaticResource BotonAzul}" Command="{x:Bind Vista.AbrirCasetaCommand}" />
+            <Button x:Name="botonActualizar" Grid.Column="1" Content="Actualizar" Style="{StaticResource BotonOro}" Command="{x:Bind Vista.ActualizarCommand}" />
+            <TextBlock x:Name="etiquetaAlerta" Grid.Column="2" Style="{StaticResource Mensaje}" VerticalAlignment="Center" Text="{x:Bind Vista.Alerta, Mode=OneWay}" />
+            <Button x:Name="botonSalir" Grid.Column="3" Content="Cerrar sesión" Style="{StaticResource BotonRojo}" Command="{x:Bind Vista.CerrarSesionCommand}" />
+        </Grid>
+
+        <TabView x:Name="pestanas" Grid.Row="2" Margin="8,0,8,8"
+                 IsAddTabButtonVisible="False" CanReorderTabs="False" CanDragTabs="False" TabWidthMode="SizeToContent"
+                 SelectedIndex="{x:Bind Vista.IndicePestana, Mode=TwoWay}">
+            <TabViewItem x:Name="pestanaAccesos" Header="Accesos por categoría" IsClosable="False" />
+            <TabViewItem x:Name="pestanaEventos" Header="Eventos y pases" IsClosable="False" />
+            <TabViewItem x:Name="pestanaAsistente" Header="Asistente" IsClosable="False" />
+            <TabViewItem x:Name="pestanaUsuarios" Header="Usuarios y permisos" IsClosable="False" />
+            <TabViewItem x:Name="pestanaReportes" Header="Reportes y alertas" IsClosable="False" />
+            <TabViewItem x:Name="pestanaBitacora" Header="Bitácora" IsClosable="False" />
+        </TabView>
+    </Grid>
+</Page>
