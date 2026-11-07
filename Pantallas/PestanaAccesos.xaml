@@ -1,7 +1,7 @@
-<UserControl x:Class="PIA_ParkUANL_Lite.PestanaAccesos"
+<UserControl x:Class="PIA_ParkUANL.PestanaAccesos"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:PIA_ParkUANL_Lite">
+             xmlns:local="using:PIA_ParkUANL">
     <Grid Background="{StaticResource Fondo}" Padding="10" RowSpacing="8">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 // =====================================================================================
 //  CODIGOSDEACCESO.CS

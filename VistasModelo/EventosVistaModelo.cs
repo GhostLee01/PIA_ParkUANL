@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Una fila de una tabla: el texto de cada celda y el dato que representa (el acceso, el evento...).</summary>
 public sealed class FilaTabla

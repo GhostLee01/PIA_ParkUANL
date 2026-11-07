@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- La única ventana de la aplicación. Cada pantalla (Page) se muestra dentro del contenedor. -->
+<Window x:Class="PIA_ParkUANL.VentanaPrincipal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ParkUANL">
+    <Grid x:Name="contenedor" Loaded="AlAbrirVentana" />
+</Window>

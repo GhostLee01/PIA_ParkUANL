@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 // =====================================================================================
 //  MODELOS.CS

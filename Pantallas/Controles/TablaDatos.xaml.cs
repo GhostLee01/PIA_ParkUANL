@@ -5,7 +5,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Markup;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 // =====================================================================================
 //  TABLADATOS — Tabla de solo lectura con encabezado azul UANL y filas alternadas.

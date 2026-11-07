@@ -1,7 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Solo lo visual: el cursor y el teclado. La lógica está en LoginVistaModelo.</summary>
 public sealed partial class LoginPagina : Page

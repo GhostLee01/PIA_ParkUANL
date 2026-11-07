@@ -1,4 +1,4 @@
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 // =====================================================================================
 //  ASISTENTEIA.CS

@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PIA_ParkUANL", "PIA_ParkUANL.csproj", "{423B8239-50C9-4BC0-8B9B-290BEAA411F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{423B8239-50C9-4BC0-8B9B-290BEAA411F3}.Debug|x64.ActiveCfg = Debug|x64
+		{423B8239-50C9-4BC0-8B9B-290BEAA411F3}.Debug|x64.Build.0 = Debug|x64
+		{423B8239-50C9-4BC0-8B9B-290BEAA411F3}.Release|x64.ActiveCfg = Release|x64
+		{423B8239-50C9-4BC0-8B9B-290BEAA411F3}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,7 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Solo el ciclo de vida: el temporizador corre mientras la pantalla está visible. La lógica está en PaseQrVistaModelo.</summary>
 public sealed partial class PaseQrPagina : Page

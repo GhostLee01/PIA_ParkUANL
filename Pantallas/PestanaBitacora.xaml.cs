@@ -1,6 +1,6 @@
 using Microsoft.UI.Xaml.Controls;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Sin lógica: todo está enlazado a BitacoraVistaModelo.</summary>
 public sealed partial class PestanaBitacora : UserControl

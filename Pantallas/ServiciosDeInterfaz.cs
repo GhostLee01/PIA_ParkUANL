@@ -4,7 +4,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.Storage.Pickers;
 using Windows.ApplicationModel.DataTransfer;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 // =====================================================================================
 //  DIALOGOS — Avisos y confirmaciones sobre la ventana (equivalen a un cuadro de mensaje).

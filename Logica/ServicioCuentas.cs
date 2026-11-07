@@ -1,4 +1,4 @@
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Lo que escribe una persona al crear su cuenta.</summary>
 public sealed record DatosDeRegistro(string Categoria, string Nombre, string Correo, string Matricula, string Placa, string Contrasena, string Confirmacion);

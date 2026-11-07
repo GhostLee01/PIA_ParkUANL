@@ -1,7 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Elige un día y, si MostrarHora es true, también la hora (en formato de 24 horas).</summary>
 public sealed partial class SelectorFecha : UserControl

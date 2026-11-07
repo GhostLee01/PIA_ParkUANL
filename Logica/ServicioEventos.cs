@@ -1,4 +1,4 @@
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Lo que se captura de un evento. Los números son null si el campo se dejó vacío.</summary>
 public sealed record DatosEvento(string Codigo, string Titulo, string Ubicacion, DateTime Inicio, DateTime Fin,

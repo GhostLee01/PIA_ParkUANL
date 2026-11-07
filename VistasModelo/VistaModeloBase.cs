@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 public enum TipoDeMensaje
 {

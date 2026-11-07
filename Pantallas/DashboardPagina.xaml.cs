@@ -1,7 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Solo arma las pestañas. La lógica está en PanelVistaModelo y en la vista-modelo de cada pestaña.</summary>
 public sealed partial class DashboardPagina : Page

@@ -1,7 +1,7 @@
-<Page x:Class="PIA_ParkUANL_Lite.CambiarContrasenaPagina"
+<Page x:Class="PIA_ParkUANL.CambiarContrasenaPagina"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:local="using:PIA_ParkUANL_Lite"
+      xmlns:local="using:PIA_ParkUANL"
       Background="{StaticResource Fondo}">
     <Grid>
         <Grid.RowDefinitions>

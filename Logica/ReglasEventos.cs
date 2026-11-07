@@ -1,4 +1,4 @@
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 // =====================================================================================
 //  REGLASEVENTOS.CS — Reglas de reservas y pases que no dependen de la pantalla.

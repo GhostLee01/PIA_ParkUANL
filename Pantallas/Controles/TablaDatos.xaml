@@ -1,4 +1,4 @@
-<UserControl x:Class="PIA_ParkUANL_Lite.TablaDatos"
+<UserControl x:Class="PIA_ParkUANL.TablaDatos"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid BorderBrush="{StaticResource Linea}" BorderThickness="1" Background="{StaticResource Blanco}">

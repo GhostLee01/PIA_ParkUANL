@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 // =====================================================================================
 //  DATOSCONFIABLES.CS

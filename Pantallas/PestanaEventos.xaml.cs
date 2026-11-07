@@ -1,7 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Solo lo visual: llevar el cursor al campo con error. La lógica está en EventosVistaModelo.</summary>
 public sealed partial class PestanaEventos : UserControl

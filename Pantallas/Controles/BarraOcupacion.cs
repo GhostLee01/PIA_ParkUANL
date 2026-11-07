@@ -4,7 +4,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Barra de ocupación: el ancho de color = % de ocupación, el color = semáforo.</summary>
 public sealed partial class BarraOcupacion : UserControl

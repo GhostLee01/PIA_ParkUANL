@@ -1,4 +1,4 @@
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Lo que captura el operador en la entrada manual.</summary>
 public sealed record DatosEntradaManual(string Categoria, string Nombre, string Matricula, string Correo, string Placa, string CodigoEvento);

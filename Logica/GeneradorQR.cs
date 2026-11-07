@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 // =====================================================================================
 //  GENERADOR DE CÓDIGO QR SIN LIBRERÍAS: calcula cada módulo y pinta directamente los píxeles.

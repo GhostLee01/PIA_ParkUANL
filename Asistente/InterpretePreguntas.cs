@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 // =====================================================================================
 //  INTERPRETEPREGUNTAS.CS

@@ -2,7 +2,7 @@ using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Tarjeta del panel: título, valor grande, detalle y una franja con el color del semáforo.</summary>
 public sealed partial class TarjetaResumen : UserControl

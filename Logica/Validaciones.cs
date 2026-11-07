@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Campo de un formulario al que pertenece un error: la pantalla lo usa para llevar ahí el cursor.</summary>
 public enum CampoFormulario

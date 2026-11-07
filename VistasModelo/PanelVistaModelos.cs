@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 // =====================================================================================
 //  PANELVISTAMODELO — PARTE 3 DE LA RÚBRICA: VISUALIZACIÓN POR CATEGORÍA + EVENTOS + IA

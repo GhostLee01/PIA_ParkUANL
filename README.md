@@ -1,4 +1,4 @@
-# ParkUANL Lite
+# ParkUANL
 
 Control de acceso de los estacionamientos gratuitos de la UANL (FACPYA y Estadio).
 Aplicación de escritorio en C# con WinUI 3. Guarda todo en archivos `.json`, sin base de datos.
@@ -12,7 +12,7 @@ No hace falta instalar nada más: WinUI se descarga con NuGet y se copia junto a
 dotnet run
 ```
 
-También se puede abrir `PIA_ParkUANL_Lite.csproj` en Visual Studio y presionar F5.
+También se puede abrir `PIA_ParkUANL.sln` en Visual Studio y presionar F5.
 
 Conviene que la carpeta del proyecto tenga una ruta corta: con una ruta muy larga, la compilación de WinUI falla
 al copiar sus archivos (límite de 260 caracteres de Windows).

@@ -5,15 +5,16 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Windows.Graphics;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 // =====================================================================================
-//  VENTANAPRINCIPAL.CS — La única ventana de la aplicación y quien cambia de pantalla.
+//  VENTANAPRINCIPAL.XAML.CS — La única ventana de la aplicación y quien cambia de pantalla.
+//  El diseño está en VentanaPrincipal.xaml: un contenedor donde se muestra cada pantalla.
 //  1) Carga (o genera) los archivos .json.  2) Muestra el Login.
 //  3) Abre la pantalla según el rol. Al cerrar sesión regresa al Login; al cerrar con la X, termina.
 //  La sesión se cierra sola tras un tiempo sin actividad: la caseta puede quedar desatendida.
 // =====================================================================================
-public sealed class VentanaPrincipal : Window, INavegador
+public sealed partial class VentanaPrincipal : Window, INavegador
 {
     private const int MinutosDeInactividad = 15;
     private const int SegundosEntreRevisiones = 30;
@@ -21,7 +22,6 @@ public sealed class VentanaPrincipal : Window, INavegador
     private sealed record Pantalla(Page Pagina, string Titulo, int Ancho, int Alto);
 
     private readonly IServiceProvider servicios;
-    private readonly Grid contenedor = new Grid();
     private readonly Stack<Pantalla> pantallas = new Stack<Pantalla>();
     private readonly DispatcherTimer revisionDeInactividad = new DispatcherTimer { Interval = TimeSpan.FromSeconds(SegundosEntreRevisiones) };
     private DateTime ultimaActividad = DateTime.Now;
@@ -31,8 +31,7 @@ public sealed class VentanaPrincipal : Window, INavegador
         ArgumentNullException.ThrowIfNull(servicios);
         this.servicios = servicios;
 
-        Content = contenedor;
-        contenedor.Loaded += AlAbrirVentana;
+        InitializeComponent();
 
         // handledEventsToo = true: también cuentan las teclas y clics que atiende un control.
         contenedor.AddHandler(UIElement.PointerMovedEvent, new PointerEventHandler((_, _) => ultimaActividad = DateTime.Now), true);

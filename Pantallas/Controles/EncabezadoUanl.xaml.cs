@@ -2,7 +2,7 @@ using System.Windows.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Franja azul con el título de la pantalla y un enlace opcional para cambiar la contraseña.</summary>
 public sealed partial class EncabezadoUanl : UserControl

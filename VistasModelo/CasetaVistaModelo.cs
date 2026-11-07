@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 // =====================================================================================
 //  CASETAVISTAMODELO — PARTE 2 DE LA RÚBRICA: REGISTRO DE INFORMACIÓN

@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Text;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 // =====================================================================================
 //  RESPUESTASASISTENTE.CS

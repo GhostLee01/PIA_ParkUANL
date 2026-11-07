@@ -1,7 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace PIA_ParkUANL_Lite;
+namespace PIA_ParkUANL;
 
 /// <summary>Solo lo visual: cursor, teclado y temporizador. La lógica está en CasetaVistaModelo.</summary>
 public sealed partial class RegistroCasetaPagina : Page
