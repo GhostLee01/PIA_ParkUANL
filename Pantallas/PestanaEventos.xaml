@@ -95,6 +95,8 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Spacing="8">
                         <TextBlock Text="Pase de visitante" Style="{StaticResource TituloGrupo}" />
+                        <TextBlock x:Name="etiquetaPase" Style="{StaticResource Etiqueta}" Text="{x:Bind Vista.AvisoDelPase, Mode=OneWay}"
+                                   Foreground="{x:Bind local:Conversiones.ColorDeAlerta(Vista.PaseSinQrValido), Mode=OneWay}" />
                         <Grid ColumnSpacing="10" RowSpacing="8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="56" />
@@ -107,15 +109,25 @@
                             </Grid.RowDefinitions>
                             <TextBlock Text="Nombre" Style="{StaticResource EtiquetaCentrada}" />
                             <TextBox x:Name="cajaPaseNombre" Grid.Column="1" MaxLength="{x:Bind local:Validaciones.LongitudMaximaNombre}"
+                                     IsReadOnly="{x:Bind Vista.CamposDelPaseBloqueados, Mode=OneWay}"
                                      Text="{x:Bind Vista.NombreVisitante, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBlock Grid.Row="1" Text="Correo" Style="{StaticResource EtiquetaCentrada}" />
                             <TextBox x:Name="cajaPaseCorreo" Grid.Row="1" Grid.Column="1" MaxLength="{x:Bind local:Validaciones.LongitudMaximaCorreo}"
+                                     IsReadOnly="{x:Bind Vista.CamposDelPaseBloqueados, Mode=OneWay}"
                                      Text="{x:Bind Vista.CorreoVisitante, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBlock Grid.Row="2" Text="Placa" Style="{StaticResource EtiquetaCentrada}" />
                             <TextBox x:Name="cajaPasePlaca" Grid.Row="2" Grid.Column="1" CharacterCasing="Upper" MaxLength="{x:Bind local:Validaciones.LongitudMaximaPlaca}"
+                                     IsReadOnly="{x:Bind Vista.CamposDelPaseBloqueados, Mode=OneWay}"
                                      Text="{x:Bind Vista.PlacaVisitante, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
-                        <Button x:Name="botonEmitir" Content="Emitir pase" Style="{StaticResource BotonVerde}" Command="{x:Bind Vista.EmitirPaseCommand}" />
+                        <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="botonEmitir" Content="Emitir pase" Style="{StaticResource BotonVerde}" Command="{x:Bind Vista.EmitirPaseCommand}" />
+                            <Button x:Name="botonNuevoPase" Grid.Column="1" Content="Nuevo pase" Style="{StaticResource BotonGris}" Command="{x:Bind Vista.NuevoPaseCommand}" />
+                        </Grid>
                         <Grid ColumnSpacing="8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />

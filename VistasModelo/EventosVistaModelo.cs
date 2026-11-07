@@ -87,6 +87,9 @@ public sealed partial class EventosVistaModelo : VistaModeloBase, IPestanaDelPan
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(RevocarPaseCommand))]
     [NotifyCanExecuteChangedFor(nameof(EliminarPaseCommand))]
+    [NotifyCanExecuteChangedFor(nameof(NuevoPaseCommand))]
+    [NotifyCanExecuteChangedFor(nameof(EmitirPaseCommand))]
+    [NotifyPropertyChangedFor(nameof(CamposDelPaseBloqueados))]
     private object? paseElegido;
 
     [ObservableProperty]
@@ -107,12 +110,25 @@ public sealed partial class EventosVistaModelo : VistaModeloBase, IPestanaDelPan
     [ObservableProperty]
     private ImagenQr? imagenDelPase;
 
+    /// <summary>De quién es el pase elegido, o por qué ya no tiene QR.</summary>
+    [ObservableProperty]
+    private string avisoDelPase = "";
+
+    [ObservableProperty]
+    private bool paseSinQrValido;
+
     public event Action? DatosCambiados;
 
     /// <summary>El código no se cambia: los pases lo usan para ligarse al evento.</summary>
     public bool CodigoSoloLectura
     {
         get { return EventoElegido is EventoCampus; }
+    }
+
+    /// <summary>Con un pase elegido, los campos muestran sus datos y no se editan: para emitir otro se usa "Nuevo pase".</summary>
+    public bool CamposDelPaseBloqueados
+    {
+        get { return PaseElegido is PaseVisitante; }
     }
 
     public EventosVistaModelo(IDialogos dialogos, IPortapapeles portapapeles, Usuario usuarioSesion)
@@ -309,27 +325,61 @@ public sealed partial class EventosVistaModelo : VistaModeloBase, IPestanaDelPan
 
     partial void OnPaseElegidoChanged(object? value)
     {
+        MostrarDatosDelPase();
         MostrarQrDelPase();
+    }
+
+    /// <summary>El QR siempre corresponde a los datos que se ven: sin pase elegido, los campos quedan libres para emitir uno.</summary>
+    private void MostrarDatosDelPase()
+    {
+        PaseVisitante? pase = PaseElegido as PaseVisitante;
+        NombreVisitante = pase?.NombreVisitante ?? "";
+        CorreoVisitante = pase?.Correo ?? "";
+        PlacaVisitante = pase?.Placa ?? "";
     }
 
     private void MostrarQrDelPase()
     {
+        string codigo = "";
+        ImagenQr? imagen = null;
+        string aviso = "";
+        bool sinQrValido = false;
+
         if (PaseElegido is PaseVisitante pase && GestorArchivos.Pases.Contains(pase))
         {
-            CodigoDelPase = CodigoPaseVisitante.Generar(pase);
-            byte[] pixeles = GeneradorQR.CrearPixeles(CodigoDelPase, PixelesPorModulo, out int lado);
-            ImagenDelPase = new ImagenQr(pixeles, lado);
+            string estado = pase.ObtenerEstado(DateTime.Now);
+            if (estado == EstadosDePase.Activo)
+            {
+                codigo = CodigoPaseVisitante.Generar(pase);
+                byte[] pixeles = GeneradorQR.CrearPixeles(codigo, PixelesPorModulo, out int lado);
+                imagen = new ImagenQr(pixeles, lado);
+                aviso = "Pase " + pase.Id + ", vence el " + pase.FechaExpiracion.ToString("dd/MM HH:mm") + ". Para emitir otro, usa \"Nuevo pase\".";
+            }
+            else
+            {
+                // La caseta ya no lo acepta: mostrar o copiar su QR solo invitaría a usarlo.
+                sinQrValido = true;
+                aviso = "Pase " + pase.Id + " " + estado.ToLowerInvariant() + ": ya no tiene un QR válido.";
+            }
         }
-        else
-        {
-            CodigoDelPase = "";
-            ImagenDelPase = null;
-        }
+
+        CodigoDelPase = codigo;
+        ImagenDelPase = imagen;
+        AvisoDelPase = aviso;
+        PaseSinQrValido = sinQrValido;
+    }
+
+    [RelayCommand(CanExecute = nameof(HayPaseElegido))]
+    private void NuevoPase()
+    {
+        PaseElegido = null;
+        LimpiarMensaje();
     }
 
     private bool PuedeEmitir()
     {
-        return EventoElegido is EventoCampus && string.IsNullOrWhiteSpace(NombreVisitante) == false && string.IsNullOrWhiteSpace(PlacaVisitante) == false;
+        return EventoElegido is EventoCampus && PaseElegido == null
+            && string.IsNullOrWhiteSpace(NombreVisitante) == false && string.IsNullOrWhiteSpace(PlacaVisitante) == false;
     }
 
     [RelayCommand(CanExecute = nameof(PuedeEmitir))]
@@ -343,9 +393,7 @@ public sealed partial class EventosVistaModelo : VistaModeloBase, IPestanaDelPan
             return;
         }
 
-        NombreVisitante = "";
-        CorreoVisitante = "";
-        PlacaVisitante = "";
+        // Al elegirlo, los campos muestran los datos con los que quedó guardado y se bloquean.
         Cargar();
         PaseElegido = pase;
         MostrarExito("Pase " + pase.Id + " emitido; vence el " + pase.FechaExpiracion.ToString("dd/MM HH:mm") + ".");
