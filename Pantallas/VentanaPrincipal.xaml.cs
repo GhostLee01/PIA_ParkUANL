@@ -16,6 +16,7 @@ namespace PIA_ParkUANL;
 // =====================================================================================
 public sealed partial class VentanaPrincipal : Window, INavegador
 {
+    private const string RutaDelIcono = @"Assets\Logos\parkuanl.ico";
     private const int MinutosDeInactividad = 15;
     private const int SegundosEntreRevisiones = 30;
 
@@ -32,6 +33,13 @@ public sealed partial class VentanaPrincipal : Window, INavegador
         this.servicios = servicios;
 
         InitializeComponent();
+
+        // Ícono de la barra de título y de la barra de tareas. Si falta el archivo, Windows usa el genérico.
+        string icono = Path.Combine(AppContext.BaseDirectory, RutaDelIcono);
+        if (File.Exists(icono))
+        {
+            AppWindow.SetIcon(icono);
+        }
 
         // handledEventsToo = true: también cuentan las teclas y clics que atiende un control.
         contenedor.AddHandler(UIElement.PointerMovedEvent, new PointerEventHandler((_, _) => ultimaActividad = DateTime.Now), true);
@@ -114,7 +122,7 @@ public sealed partial class VentanaPrincipal : Window, INavegador
     public void MostrarLogin()
     {
         pantallas.Clear();
-        Mostrar(new LoginPagina(Crear<LoginVistaModelo>()), "ParkUANL — Inicio de sesión", 480, 600);
+        Mostrar(new LoginPagina(Crear<LoginVistaModelo>()), "ParkUANL — Inicio de sesión", 480, 720);
     }
 
     /// <summary>Después de iniciar sesión: pide cambiar la contraseña si hace falta y abre la pantalla del rol.</summary>

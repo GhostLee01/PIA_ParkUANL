@@ -2,16 +2,20 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:PIA_ParkUANL">
-    <Grid Background="{StaticResource AzulUanl}" BorderBrush="{StaticResource OroUanl}" BorderThickness="0,0,0,4" Padding="18,8,18,8">
+    <Grid Background="{StaticResource AzulUanl}" BorderBrush="{StaticResource OroUanl}" BorderThickness="0,0,0,4" Padding="12,8,18,8" ColumnSpacing="10">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <StackPanel>
+        <!-- Isotipo en negativo: es la versión del logo para fondo azul -->
+        <Image x:Name="isotipo" Source="ms-appx:///Assets/Logos/png/isotipo-negativo-512.png" Width="52" Height="52"
+               VerticalAlignment="Center" AutomationProperties.Name="ParkUANL" />
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
             <TextBlock Text="{x:Bind Titulo, Mode=OneWay}" Foreground="White" FontSize="21" FontWeight="Bold" />
             <TextBlock Text="{x:Bind Subtitulo, Mode=OneWay}" Foreground="{StaticResource OroUanl}" FontSize="13" />
         </StackPanel>
-        <HyperlinkButton x:Name="enlaceCuenta" Grid.Column="1" VerticalAlignment="Bottom" Padding="4,0" Foreground="{StaticResource OroUanl}"
+        <HyperlinkButton x:Name="enlaceCuenta" Grid.Column="2" VerticalAlignment="Bottom" Padding="4,0" Foreground="{StaticResource OroUanl}"
                          Content="Cambiar contraseña" Command="{x:Bind ComandoCuenta, Mode=OneWay}"
                          Visibility="{x:Bind TieneComando(ComandoCuenta), Mode=OneWay}">
             <HyperlinkButton.Resources>

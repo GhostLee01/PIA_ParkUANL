@@ -1,5 +1,12 @@
 # ParkUANL
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="Assets/Logos/png/logo-horizontal-negativo.png">
+    <img src="Assets/Logos/png/logo-horizontal.png" alt="ParkUANL, control de acceso vehicular" width="420">
+  </picture>
+</p>
+
 Control de acceso de los estacionamientos gratuitos de la UANL (FACPYA y Estadio).
 Aplicación de escritorio en C# con WinUI 3. Guarda todo en archivos `.json`, sin base de datos.
 

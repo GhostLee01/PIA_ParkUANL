@@ -15,6 +15,8 @@
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <!-- MVVMTK0045: aviso solo para Native AOT, que este proyecto no usa -->
     <NoWarn>$(NoWarn);MVVMTK0045</NoWarn>
+    <!-- Ícono del .exe en el Explorador -->
+    <ApplicationIcon>Assets\Logos\parkuanl.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,6 +38,15 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
     <!-- Protege la clave de firma de los QR con la cuenta de Windows -->
     <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- WinUI copia toda la carpeta Assets por defecto: aquí se deja solo lo que usa la app.
+         logo-horizontal-negativo.png es solo para el README en modo oscuro, así que no se copia. -->
+    <Content Remove="Assets\**" />
+    <Content Include="Assets\Logos\parkuanl.ico" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Logos\png\isotipo-negativo-512.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Logos\png\logo-horizontal.png" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
