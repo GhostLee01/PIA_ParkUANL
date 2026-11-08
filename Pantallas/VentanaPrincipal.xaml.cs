@@ -13,14 +13,17 @@ namespace PIA_ParkUANL;
 //  1) Carga (o genera) los archivos .json.  2) Muestra el Login.
 //  3) Abre la pantalla según el rol. Al cerrar sesión regresa al Login; al cerrar con la X, termina.
 //  La sesión se cierra sola tras un tiempo sin actividad: la caseta puede quedar desatendida.
+//  La ventana toma su tamaño una sola vez, al abrirse: al cambiar de pantalla no cambia de tamaño.
 // =====================================================================================
 public sealed partial class VentanaPrincipal : Window, INavegador
 {
     private const string RutaDelIcono = @"Assets\Logos\parkuanl.ico";
     private const int MinutosDeInactividad = 15;
     private const int SegundosEntreRevisiones = 30;
+    private const int AnchoDeLaVentana = 1280;
+    private const int AltoDeLaVentana = 860;
 
-    private sealed record Pantalla(Page Pagina, string Titulo, int Ancho, int Alto);
+    private sealed record Pantalla(Page Pagina, string Titulo);
 
     private readonly IServiceProvider servicios;
     private readonly Stack<Pantalla> pantallas = new Stack<Pantalla>();
@@ -55,6 +58,8 @@ public sealed partial class VentanaPrincipal : Window, INavegador
         // async void solo se admite aquí por ser un evento, y por eso atrapa sus propios errores.
         try
         {
+            AjustarAPantalla(AnchoDeLaVentana, AltoDeLaVentana);
+
             IDialogos dialogos = servicios.GetRequiredService<IDialogos>();
             if (BloqueoDeInstancia.Tomar() == false)
             {
@@ -122,7 +127,7 @@ public sealed partial class VentanaPrincipal : Window, INavegador
     public void MostrarLogin()
     {
         pantallas.Clear();
-        Mostrar(new LoginPagina(Crear<LoginVistaModelo>()), "ParkUANL — Inicio de sesión", 480, 720);
+        Mostrar(new LoginPagina(Crear<LoginVistaModelo>()), "ParkUANL — Inicio de sesión");
     }
 
     /// <summary>Después de iniciar sesión: pide cambiar la contraseña si hace falta y abre la pantalla del rol.</summary>
@@ -145,7 +150,7 @@ public sealed partial class VentanaPrincipal : Window, INavegador
         }
         else
         {
-            Mostrar(new PaseQrPagina(Crear<PaseQrVistaModelo>(usuario)), "ParkUANL — Mi pase QR", 800, 620);
+            Mostrar(new PaseQrPagina(Crear<PaseQrVistaModelo>(usuario)), "ParkUANL — Mi pase QR");
         }
     }
 
@@ -154,27 +159,27 @@ public sealed partial class VentanaPrincipal : Window, INavegador
         PanelVistaModelo panel = Crear<PanelVistaModelo>(usuario,
             Crear<AccesosVistaModelo>(usuario), Crear<EventosVistaModelo>(usuario), Crear<AsistenteVistaModelo>(),
             Crear<UsuariosVistaModelo>(usuario), Crear<ReportesVistaModelo>(usuario), Crear<BitacoraVistaModelo>());
-        Mostrar(new DashboardPagina(panel), "ParkUANL — Panel de control", 1280, 860);
+        Mostrar(new DashboardPagina(panel), "ParkUANL — Panel de control");
     }
 
     public void MostrarRegistroDeCuenta(Action<string> alCrearCuenta)
     {
-        Mostrar(new RegistroCuentaPagina(Crear<RegistroCuentaVistaModelo>(alCrearCuenta)), "ParkUANL — Crear cuenta", 480, 840);
+        Mostrar(new RegistroCuentaPagina(Crear<RegistroCuentaVistaModelo>(alCrearCuenta)), "ParkUANL — Crear cuenta");
     }
 
     public void MostrarCambioDeContrasena(Usuario usuario, bool esObligatorio)
     {
-        Mostrar(new CambiarContrasenaPagina(Crear<CambiarContrasenaVistaModelo>(usuario, esObligatorio)), "ParkUANL — Cambiar contraseña", 460, 540);
+        Mostrar(new CambiarContrasenaPagina(Crear<CambiarContrasenaVistaModelo>(usuario, esObligatorio)), "ParkUANL — Cambiar contraseña");
     }
 
     public void MostrarMisVehiculos(Usuario usuario)
     {
-        Mostrar(new MisVehiculosPagina(Crear<MisVehiculosVistaModelo>(usuario)), "ParkUANL — Mis vehículos", 440, 560);
+        Mostrar(new MisVehiculosPagina(Crear<MisVehiculosVistaModelo>(usuario)), "ParkUANL — Mis vehículos");
     }
 
     public void MostrarCaseta(Usuario usuario)
     {
-        Mostrar(new RegistroCasetaPagina(Crear<CasetaVistaModelo>(usuario)), "ParkUANL — Caseta de acceso", 1240, 860);
+        Mostrar(new RegistroCasetaPagina(Crear<CasetaVistaModelo>(usuario)), "ParkUANL — Caseta de acceso");
     }
 
     public void Regresar()
@@ -189,9 +194,9 @@ public sealed partial class VentanaPrincipal : Window, INavegador
         Presentar(pantallas.Peek());
     }
 
-    private void Mostrar(Page pagina, string titulo, int ancho, int alto)
+    private void Mostrar(Page pagina, string titulo)
     {
-        Pantalla pantalla = new Pantalla(pagina, titulo, ancho, alto);
+        Pantalla pantalla = new Pantalla(pagina, titulo);
         pantallas.Push(pantalla);
         Presentar(pantalla);
     }
@@ -201,7 +206,6 @@ public sealed partial class VentanaPrincipal : Window, INavegador
         contenedor.Children.Clear();
         contenedor.Children.Add(pantalla.Pagina);
         Title = pantalla.Titulo;
-        AjustarAPantalla(pantalla.Ancho, pantalla.Alto);
     }
 
     /// <summary>Si la ventana es más grande que la pantalla (por ejemplo con escala 150 %), se ajusta y se centra.</summary>

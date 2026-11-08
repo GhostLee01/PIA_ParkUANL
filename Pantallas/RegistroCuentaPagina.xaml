@@ -10,42 +10,45 @@
         </Grid.RowDefinitions>
         <local:EncabezadoUanl Titulo="Crear cuenta" Subtitulo="Solo alumnos y docentes de la UANL" />
         <ScrollViewer Grid.Row="1">
-            <StackPanel Margin="40,14,40,14" Spacing="4">
-                <TextBlock Text="Soy" Style="{StaticResource Etiqueta}" />
-                <ComboBox x:Name="comboCategoria" HorizontalAlignment="Stretch" ItemsSource="{x:Bind Vista.CategoriasDisponibles}"
-                          SelectedItem="{x:Bind Vista.Categoria, Mode=TwoWay, Converter={StaticResource ATexto}}" />
-                <TextBlock Text="Nombre completo" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
-                <TextBox x:Name="cajaNombre" MaxLength="{x:Bind local:Validaciones.LongitudMaximaNombre}"
-                         Text="{x:Bind Vista.Nombre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Correo universitario (ej. ana.garzat@uanl.edu.mx)" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
-                <TextBox x:Name="cajaCorreo" MaxLength="{x:Bind local:Validaciones.LongitudMaximaCorreo}"
-                         Text="{x:Bind Vista.Correo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Matrícula o número de empleado (7 dígitos)" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
-                <TextBox x:Name="cajaMatricula" MaxLength="{x:Bind local:Validaciones.LongitudMatricula}"
-                         Text="{x:Bind Vista.Matricula, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Placa del vehículo (ej. ABC-123)" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
-                <TextBox x:Name="cajaPlaca" CharacterCasing="Upper" MaxLength="{x:Bind local:Validaciones.LongitudMaximaPlaca}"
-                         Text="{x:Bind Vista.Placa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Contraseña (de 8 a 12 caracteres, con letras y números)" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
-                <PasswordBox x:Name="cajaContrasena" PasswordRevealMode="Hidden" MaxLength="{x:Bind local:Validaciones.LongitudMaximaContrasena}"
-                             Password="{x:Bind Vista.Contrasena, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Confirmar contraseña" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
-                <PasswordBox x:Name="cajaConfirmacion" PasswordRevealMode="Hidden" MaxLength="{x:Bind local:Validaciones.LongitudMaximaContrasena}"
-                             Password="{x:Bind Vista.Confirmacion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <InfoBar x:Name="barraMensaje" IsClosable="False" Margin="0,6,0,0"
-                         IsOpen="{x:Bind Vista.HayMensaje, Mode=OneWay}" Message="{x:Bind Vista.Mensaje, Mode=OneWay}"
-                         Severity="{x:Bind local:Conversiones.Severidad(Vista.TipoMensaje), Mode=OneWay}" />
-                <Grid ColumnSpacing="10" Margin="0,6,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button x:Name="botonCrear" Content="Crear cuenta" Style="{StaticResource BotonVerde}" Command="{x:Bind Vista.CrearCuentaCommand}" />
-                    <Button x:Name="botonCancelar" Grid.Column="1" Content="Cancelar" Style="{StaticResource BotonGris}" Command="{x:Bind Vista.CancelarCommand}" />
-                </Grid>
-                <TextBlock Text="Aviso de privacidad: tu nombre, matrícula, correo y placa se usan solo para controlar el acceso a los estacionamientos."
-                           Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
-            </StackPanel>
+            <!-- La ventana es grande: el formulario va en una tarjeta angosta y centrada -->
+            <Border Style="{StaticResource Grupo}" MaxWidth="460" Margin="20,28,20,28" Padding="28,22" VerticalAlignment="Top">
+                <StackPanel Spacing="4">
+                    <TextBlock Text="Soy" Style="{StaticResource Etiqueta}" />
+                    <ComboBox x:Name="comboCategoria" HorizontalAlignment="Stretch" ItemsSource="{x:Bind Vista.CategoriasDisponibles}"
+                              SelectedItem="{x:Bind Vista.Categoria, Mode=TwoWay, Converter={StaticResource ATexto}}" />
+                    <TextBlock Text="Nombre completo" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
+                    <TextBox x:Name="cajaNombre" MaxLength="{x:Bind local:Validaciones.LongitudMaximaNombre}"
+                             Text="{x:Bind Vista.Nombre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Correo universitario (ej. ana.garzat@uanl.edu.mx)" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
+                    <TextBox x:Name="cajaCorreo" MaxLength="{x:Bind local:Validaciones.LongitudMaximaCorreo}"
+                             Text="{x:Bind Vista.Correo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Matrícula o número de empleado (7 dígitos)" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
+                    <TextBox x:Name="cajaMatricula" MaxLength="{x:Bind local:Validaciones.LongitudMatricula}"
+                             Text="{x:Bind Vista.Matricula, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Placa del vehículo (ej. ABC-123)" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
+                    <TextBox x:Name="cajaPlaca" CharacterCasing="Upper" MaxLength="{x:Bind local:Validaciones.LongitudMaximaPlaca}"
+                             Text="{x:Bind Vista.Placa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Contraseña (de 8 a 12 caracteres, con letras y números)" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
+                    <PasswordBox x:Name="cajaContrasena" PasswordRevealMode="Hidden" MaxLength="{x:Bind local:Validaciones.LongitudMaximaContrasena}"
+                                 Password="{x:Bind Vista.Contrasena, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Confirmar contraseña" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
+                    <PasswordBox x:Name="cajaConfirmacion" PasswordRevealMode="Hidden" MaxLength="{x:Bind local:Validaciones.LongitudMaximaContrasena}"
+                                 Password="{x:Bind Vista.Confirmacion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <InfoBar x:Name="barraMensaje" IsClosable="False" Margin="0,6,0,0"
+                             IsOpen="{x:Bind Vista.HayMensaje, Mode=OneWay}" Message="{x:Bind Vista.Mensaje, Mode=OneWay}"
+                             Severity="{x:Bind local:Conversiones.Severidad(Vista.TipoMensaje), Mode=OneWay}" />
+                    <Grid ColumnSpacing="10" Margin="0,6,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="botonCrear" Content="Crear cuenta" Style="{StaticResource BotonVerde}" Command="{x:Bind Vista.CrearCuentaCommand}" />
+                        <Button x:Name="botonCancelar" Grid.Column="1" Content="Cancelar" Style="{StaticResource BotonGris}" Command="{x:Bind Vista.CancelarCommand}" />
+                    </Grid>
+                    <TextBlock Text="Aviso de privacidad: tu nombre, matrícula, correo y placa se usan solo para controlar el acceso a los estacionamientos."
+                               Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
+                </StackPanel>
+            </Border>
         </ScrollViewer>
     </Grid>
 </Page>

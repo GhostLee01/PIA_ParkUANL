@@ -10,28 +10,31 @@
         </Grid.RowDefinitions>
         <local:EncabezadoUanl Titulo="Cambiar contraseña" Subtitulo="{x:Bind Vista.Subtitulo}" />
         <ScrollViewer Grid.Row="1">
-            <StackPanel Margin="30,18,30,18" Spacing="6">
-                <TextBlock Text="Contraseña actual" Style="{StaticResource Etiqueta}" />
-                <PasswordBox x:Name="cajaActual" PasswordRevealMode="Hidden" MaxLength="{x:Bind local:Validaciones.LongitudMaximaContrasenaGuardada}"
-                             Password="{x:Bind Vista.ContrasenaActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Contraseña nueva (de 8 a 12 caracteres, con letras y números)" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
-                <PasswordBox x:Name="cajaNueva" PasswordRevealMode="Hidden" MaxLength="{x:Bind local:Validaciones.LongitudMaximaContrasena}"
-                             Password="{x:Bind Vista.ContrasenaNueva, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Confirmar contraseña nueva" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
-                <PasswordBox x:Name="cajaConfirmacion" PasswordRevealMode="Hidden" MaxLength="{x:Bind local:Validaciones.LongitudMaximaContrasena}"
-                             Password="{x:Bind Vista.Confirmacion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <InfoBar x:Name="barraMensaje" IsClosable="False" Margin="0,6,0,0"
-                         IsOpen="{x:Bind Vista.HayMensaje, Mode=OneWay}" Message="{x:Bind Vista.Mensaje, Mode=OneWay}"
-                         Severity="{x:Bind local:Conversiones.Severidad(Vista.TipoMensaje), Mode=OneWay}" />
-                <Grid ColumnSpacing="10" Margin="0,6,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button x:Name="botonGuardar" Content="Guardar" Style="{StaticResource BotonVerde}" Command="{x:Bind Vista.GuardarCommand}" />
-                    <Button x:Name="botonCancelar" Grid.Column="1" Content="{x:Bind Vista.TextoBotonSalir}" Style="{StaticResource BotonGris}" Command="{x:Bind Vista.SalirCommand}" />
-                </Grid>
-            </StackPanel>
+            <!-- La ventana es grande: el formulario va en una tarjeta angosta y centrada -->
+            <Border Style="{StaticResource Grupo}" MaxWidth="460" Margin="20,28,20,28" Padding="28,22" VerticalAlignment="Top">
+                <StackPanel Spacing="6">
+                    <TextBlock Text="Contraseña actual" Style="{StaticResource Etiqueta}" />
+                    <PasswordBox x:Name="cajaActual" PasswordRevealMode="Hidden" MaxLength="{x:Bind local:Validaciones.LongitudMaximaContrasenaGuardada}"
+                                 Password="{x:Bind Vista.ContrasenaActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Contraseña nueva (de 8 a 12 caracteres, con letras y números)" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
+                    <PasswordBox x:Name="cajaNueva" PasswordRevealMode="Hidden" MaxLength="{x:Bind local:Validaciones.LongitudMaximaContrasena}"
+                                 Password="{x:Bind Vista.ContrasenaNueva, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Confirmar contraseña nueva" Style="{StaticResource Etiqueta}" Margin="0,6,0,0" />
+                    <PasswordBox x:Name="cajaConfirmacion" PasswordRevealMode="Hidden" MaxLength="{x:Bind local:Validaciones.LongitudMaximaContrasena}"
+                                 Password="{x:Bind Vista.Confirmacion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <InfoBar x:Name="barraMensaje" IsClosable="False" Margin="0,6,0,0"
+                             IsOpen="{x:Bind Vista.HayMensaje, Mode=OneWay}" Message="{x:Bind Vista.Mensaje, Mode=OneWay}"
+                             Severity="{x:Bind local:Conversiones.Severidad(Vista.TipoMensaje), Mode=OneWay}" />
+                    <Grid ColumnSpacing="10" Margin="0,6,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="botonGuardar" Content="Guardar" Style="{StaticResource BotonVerde}" Command="{x:Bind Vista.GuardarCommand}" />
+                        <Button x:Name="botonCancelar" Grid.Column="1" Content="{x:Bind Vista.TextoBotonSalir}" Style="{StaticResource BotonGris}" Command="{x:Bind Vista.SalirCommand}" />
+                    </Grid>
+                </StackPanel>
+            </Border>
         </ScrollViewer>
     </Grid>
 </Page>
