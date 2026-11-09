@@ -58,7 +58,6 @@
             <TextBlock Text="Corregir el registro seleccionado:" Style="{StaticResource EtiquetaCentrada}" />
             <Button x:Name="botonAnular" Content="Anular registro" Width="150" Style="{StaticResource BotonRojo}" Command="{x:Bind Vista.AnularCommand}" />
             <Button x:Name="botonDeshacer" Content="Deshacer salida" Width="150" Style="{StaticResource BotonAzul}" Command="{x:Bind Vista.DeshacerSalidaCommand}" />
-            <Button x:Name="botonCorregirPlaca" Content="Corregir placa" Width="150" Style="{StaticResource BotonOro}" Command="{x:Bind Vista.CorregirPlacaCommand}" />
         </StackPanel>
 
         <local:TablaDatos x:Name="tablaAccesos" Grid.Row="3" Columnas="Placa,Nombre,Categoría,Matrícula,Lugar,Cajón,Evento,Método,Entrada,Salida,Estancia,Estado"

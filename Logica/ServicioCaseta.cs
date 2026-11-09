@@ -115,7 +115,8 @@ public static class ServicioCaseta
             if ((matricula != "" && usuario.Matricula == matricula) || placaEncontrada != null)
             {
                 return new DatosDePersona(usuario.Categoria, usuario.NombreCompleto, usuario.Matricula, usuario.Correo, placaEncontrada ?? usuario.Placa,
-                    "Datos cargados del registro de la Comunidad UANL: " + usuario.NombreCompleto + ". Revisa la placa y registra la entrada.");
+                    "Datos cargados del registro de la Comunidad UANL: " + usuario.NombreCompleto + ". Placas de su cuenta: " +
+                    string.Join(", ", usuario.ObtenerPlacas()) + ". Revisa que sea una de ellas y registra la entrada.");
             }
         }
 
@@ -172,7 +173,7 @@ public static class ServicioCaseta
             return categoria;
         }
 
-        ResultadoValidacion identidad = ValidarIdentidad(datos.Categoria, nombre, matricula, correo);
+        ResultadoValidacion identidad = ValidarIdentidad(datos.Categoria, nombre, matricula, correo, out Usuario? cuenta);
         if (identidad.EsCorrecto == false)
         {
             return identidad;
@@ -182,6 +183,12 @@ public static class ServicioCaseta
         if (motivoDeBloqueo != "")
         {
             return new ResultadoValidacion(motivoDeBloqueo);
+        }
+
+        ResultadoValidacion placaDeLaPersona = ValidarPlacaDeLaPersona(placa, cuenta);
+        if (placaDeLaPersona.EsCorrecto == false)
+        {
+            return placaDeLaPersona;
         }
 
         string codigoEvento = datos.CodigoEvento == OpcionesDeFiltro.NingunEvento ? "" : datos.CodigoEvento;
@@ -246,21 +253,47 @@ public static class ServicioCaseta
         return ResultadoValidacion.Correcto;
     }
 
-    /// <summary>Si la matrícula o el correo son de una cuenta, el nombre y la categoría deben ser los de esa persona.</summary>
-    private static ResultadoValidacion ValidarIdentidad(string categoria, string nombre, string matricula, string correo)
+    /// <summary>
+    /// Si la matrícula o el correo son de una cuenta, el nombre y la categoría deben ser los de esa persona.
+    /// Regresa esa cuenta, o null si la persona no tiene cuenta.
+    /// </summary>
+    private static ResultadoValidacion ValidarIdentidad(string categoria, string nombre, string matricula, string correo, out Usuario? cuenta)
     {
         Usuario? porMatricula = matricula == "" ? null : GestorArchivos.Usuarios.FirstOrDefault(usuario => usuario.Matricula == matricula);
         Usuario? porCorreo = correo == "" ? null : GestorArchivos.Usuarios.FirstOrDefault(usuario => usuario.Correo.ToLowerInvariant() == correo);
 
+        cuenta = porMatricula ?? porCorreo;
         if (porMatricula != null && porCorreo != null && porMatricula != porCorreo)
         {
             return new ResultadoValidacion("La matrícula y el correo son de dos cuentas distintas.", CampoFormulario.Correo);
         }
-
-        Usuario? cuenta = porMatricula ?? porCorreo;
         if (cuenta != null && cuenta.Categoria != "" && (cuenta.Categoria != categoria || ServicioCuentas.EsMismaPersona(cuenta.NombreCompleto, nombre) == false))
         {
             return new ResultadoValidacion("Esa cuenta es de " + cuenta.NombreCompleto + " (" + cuenta.Categoria + "). Presiona Buscar para cargar sus datos.", CampoFormulario.Nombre);
+        }
+        return ResultadoValidacion.Correcto;
+    }
+
+    /// <summary>
+    /// Las placas de una cuenta solo las agrega o quita su dueño, en "Mis vehículos". El operador no puede
+    /// ligar una placa a otra persona: una placa registrada solo entra a nombre de su dueño, y quien tiene
+    /// cuenta de la Comunidad solo entra con las placas que registró.
+    /// </summary>
+    private static ResultadoValidacion ValidarPlacaDeLaPersona(string placa, Usuario? cuenta)
+    {
+        Usuario? dueno = ServicioCuentas.BuscarDuenoDePlaca(placa);
+        if (dueno != null && dueno != cuenta)
+        {
+            return new ResultadoValidacion("La placa " + placa + " está registrada en la cuenta de " + dueno.NombreCompleto +
+                                           ": solo puede entrar a nombre de su dueño.", CampoFormulario.Placa);
+        }
+
+        // Las cuentas de Operador y Administrador no tienen "Mis vehículos": no se les exige placa registrada.
+        if (cuenta != null && cuenta.Rol == Roles.Comunidad && dueno == null)
+        {
+            return new ResultadoValidacion("La placa " + placa + " no está registrada en la cuenta de " + cuenta.NombreCompleto +
+                                           ". Solo su dueño puede agregarla, en \"Mis vehículos\". Placas de su cuenta: " +
+                                           string.Join(", ", cuenta.ObtenerPlacas()) + ".", CampoFormulario.Placa);
         }
         return ResultadoValidacion.Correcto;
     }

@@ -76,13 +76,9 @@ public sealed class Dialogos : IDialogos, IDisposable
         return await Mostrar(dialogo) == ContentDialogResult.Primary;
     }
 
-    public async Task<string?> PedirTexto(string titulo, string instruccion, string textoInicial = "", bool enMayusculas = false)
+    public async Task<string?> PedirTexto(string titulo, string instruccion, string textoInicial = "")
     {
         TextBox cajaTexto = new TextBox { MaxLength = Validaciones.LongitudMaximaTextoLibre, Text = textoInicial };
-        if (enMayusculas)
-        {
-            cajaTexto.CharacterCasing = CharacterCasing.Upper;
-        }
 
         StackPanel contenido = new StackPanel { Spacing = 10 };
         contenido.Children.Add(CrearTexto(instruccion));

@@ -326,7 +326,6 @@ public sealed partial class AccesosVistaModelo : VistaModeloBase, IPestanaDelPan
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(AnularCommand))]
     [NotifyCanExecuteChangedFor(nameof(DeshacerSalidaCommand))]
-    [NotifyCanExecuteChangedFor(nameof(CorregirPlacaCommand))]
     private object? registroElegido;
 
     [ObservableProperty]
@@ -495,27 +494,6 @@ public sealed partial class AccesosVistaModelo : VistaModeloBase, IPestanaDelPan
             {
                 await MostrarResultado(CorreccionMovimientos.DeshacerSalida(registro, usuarioSesion.NombreUsuario, motivo));
             }
-        }
-    }
-
-    [RelayCommand(CanExecute = nameof(HayRegistroElegido))]
-    private async Task CorregirPlaca()
-    {
-        if (RegistroElegido is not RegistroAcceso registro)
-        {
-            return;
-        }
-
-        string? placaCorrecta = await dialogos.PedirTexto("Corregir placa", "Escribe la placa correcta:", registro.Placa, true);
-        if (placaCorrecta == null)
-        {
-            return;
-        }
-
-        string? motivo = await PedirMotivo("Corregir placa de " + registro.Placa);
-        if (motivo != null)
-        {
-            await MostrarResultado(CorreccionMovimientos.CorregirPlaca(registro, placaCorrecta, usuarioSesion.NombreUsuario, motivo));
         }
     }
 }

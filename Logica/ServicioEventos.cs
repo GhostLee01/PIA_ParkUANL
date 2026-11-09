@@ -290,6 +290,14 @@ public static class ServicioEventos
             return new ResultadoValidacion(motivoDeBloqueo, CampoFormulario.Placa);
         }
 
+        // Una placa registrada es de su dueño: el administrador no puede asignársela a un visitante.
+        Usuario? dueno = ServicioCuentas.BuscarDuenoDePlaca(placa);
+        if (dueno != null)
+        {
+            return new ResultadoValidacion("La placa " + placa + " está registrada en la cuenta de " + dueno.NombreCompleto +
+                                           ": su dueño entra con su propio pase QR, no con un pase de visitante.", CampoFormulario.Placa);
+        }
+
         int pasesActivos = CalculadoraAforo.ContarPasesActivos(evento, GestorArchivos.Pases, ahora);
         if (pasesActivos >= evento.MaxVisitantes)
         {

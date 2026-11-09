@@ -5,6 +5,8 @@ namespace PIA_ParkUANL;
 //  Arregla los errores de captura. Cada corrección pide un motivo y queda en la bitácora.
 //  El cambio y su línea de bitácora se guardan juntos: no puede existir uno sin el otro.
 //  Los métodos regresan "" si todo salió bien, o el mensaje de error.
+//  Ninguna corrección cambia una placa: las placas de una cuenta solo las agrega o quita
+//  su dueño en "Mis vehículos". Un acceso con la placa equivocada se anula y se captura de nuevo.
 // =====================================================================================
 public static class CorreccionMovimientos
 {
@@ -88,47 +90,6 @@ public static class CorreccionMovimientos
             registro.FechaSalida = null;
             registro.OperadorSalida = "";
             GestorArchivos.AnotarEnBitacora(nombreUsuario, "Deshacer salida", DescribirRegistro(registro), motivo);
-        });
-        return guardado ? "" : MensajeNoSeGuardo;
-    }
-
-    public static string CorregirPlaca(RegistroAcceso registro, string placaCorrecta, string nombreUsuario, string motivo)
-    {
-        ArgumentNullException.ThrowIfNull(registro);
-
-        // === [RÚBRICA 1] VALIDACIONES DE CAMPO ===
-        string errorDeMotivo = ValidarMotivo(motivo);
-        if (errorDeMotivo != "")
-        {
-            return errorDeMotivo;
-        }
-        if (Validaciones.EsPlacaValida(placaCorrecta) == false)
-        {
-            return Validaciones.MensajePlacaInvalida;
-        }
-        if (Validaciones.EsMismaPlaca(registro.Placa, placaCorrecta))
-        {
-            return "Esa ya es la placa del registro.";
-        }
-        if (registro.EstaAdentro && GestorArchivos.Accesos.Any(acceso => acceso != registro && acceso.EstaAdentro
-                                                                         && Validaciones.EsMismaPlaca(acceso.Placa, placaCorrecta)))
-        {
-            return "La placa " + placaCorrecta + " ya está adentro en otro registro.";
-        }
-        if (registro.EstaAdentro)
-        {
-            string motivoDeBloqueo = ServicioCaseta.ObtenerMotivoDeBloqueo("", "", placaCorrecta, DateTime.Now);
-            if (motivoDeBloqueo != "")
-            {
-                return motivoDeBloqueo;
-            }
-        }
-
-        string placaAnterior = registro.Placa;
-        bool guardado = GestorArchivos.Transaccion(ArchivosDeDatos.Accesos | ArchivosDeDatos.Bitacora, () =>
-        {
-            registro.Placa = placaCorrecta;
-            GestorArchivos.AnotarEnBitacora(nombreUsuario, "Corregir placa", "Registro #" + registro.Id + ": " + placaAnterior + " → " + placaCorrecta, motivo);
         });
         return guardado ? "" : MensajeNoSeGuardo;
     }

@@ -21,7 +21,7 @@ public interface IDialogos
     Task<bool> Confirmar(string titulo, string pregunta);
 
     /// <summary>Regresa lo que escribió el usuario, o null si canceló.</summary>
-    Task<string?> PedirTexto(string titulo, string instruccion, string textoInicial = "", bool enMayusculas = false);
+    Task<string?> PedirTexto(string titulo, string instruccion, string textoInicial = "");
 
     Task<OpcionCierreDeTurno> PreguntarCierreDeTurno(string resumen);
 }
