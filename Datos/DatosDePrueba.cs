@@ -110,13 +110,13 @@ public static class DatosDePrueba
         return new List<EventoCampus>
         {
             new EventoCampus { Id = 1, Codigo = "congreso-gumersindo", Titulo = "Congreso Gumersindo Cantú Hinojosa",
-                               Ubicacion = "Aula Magna FACPYA", FechaInicio = hoy.AddDays(-1).AddHours(7), FechaFin = hoy.AddDays(2).AddHours(20),
+                               Ubicacion = Estacionamientos.Facpya, FechaInicio = hoy.AddDays(-1).AddHours(7), FechaFin = hoy.AddDays(2).AddHours(20),
                                LugaresReservadosFacpya = 40, MaxVisitantes = 150, VigenciaHorasPase = 12 },
             new EventoCampus { Id = 2, Codigo = "feria-empleo-facpya", Titulo = "Feria del Empleo FACPYA",
-                               Ubicacion = "Explanada FACPYA", FechaInicio = hoy.AddDays(-8).AddHours(9), FechaFin = hoy.AddDays(-8).AddHours(17),
+                               Ubicacion = Estacionamientos.Facpya, FechaInicio = hoy.AddDays(-8).AddHours(9), FechaFin = hoy.AddDays(-8).AddHours(17),
                                LugaresReservadosFacpya = 30, MaxVisitantes = 100, VigenciaHorasPase = 8 },
             new EventoCampus { Id = 3, Codigo = "partido-tigres-femenil", Titulo = "Partido Tigres Femenil",
-                               Ubicacion = "Estadio Universitario", FechaInicio = hoy.AddDays(5).AddHours(18), FechaFin = hoy.AddDays(5).AddHours(22),
+                               Ubicacion = Estacionamientos.Estadio, FechaInicio = hoy.AddDays(5).AddHours(18), FechaFin = hoy.AddDays(5).AddHours(22),
                                LugaresReservadosFacpya = 0, MaxVisitantes = 300, VigenciaHorasPase = 6 }
         };
     }

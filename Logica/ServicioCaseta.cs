@@ -242,10 +242,10 @@ public static class ServicioCaseta
             return new ResultadoValidacion("Elige una categoría válida.", CampoFormulario.Categoria);
         }
 
-        // Visitante: el correo es opcional, pero si lo escriben debe tener formato válido.
+        // Visitante: el correo es opcional, pero si lo escriben debe ser de un dominio real (ver EsCorreoValido).
         if (correo != "" && Validaciones.EsCorreoValido(correo) == false)
         {
-            return new ResultadoValidacion("El correo del visitante no tiene un formato válido.", CampoFormulario.Correo);
+            return new ResultadoValidacion(Validaciones.MensajeCorreoInvalido, CampoFormulario.Correo);
         }
 
         // Los visitantes no tienen matrícula: lo que se haya escrito no se guarda.

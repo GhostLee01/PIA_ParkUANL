@@ -16,6 +16,7 @@ public enum CampoFormulario
     Confirmacion,
     Codigo,
     Titulo,
+    Ubicacion,
     Reservados,
     MaximoVisitantes,
     VigenciaHoras,
@@ -44,6 +45,7 @@ public static partial class Validaciones
     public const string MensajePlacaInvalida = "Placa inválida. Usa de 5 a 9 letras y números, con guiones si los lleva (ej. ABC-123, 123-ABC o AB-1234).";
     public const string MensajeContrasenaInvalida = "La contraseña debe tener de 8 a 12 caracteres, incluir letras y números, y no ser una contraseña común.";
     public const string MensajeCorreoUanlInvalido = "Usa nombre.apellido más inicial del segundo apellido, sin acentos: ana.garzat@uanl.edu.mx";
+    public const string MensajeCorreoInvalido = "El correo no es válido. Usa uno como nombre@gmail.com, nombre@outlook.com o nombre@hotmail.com, o de otro dominio real, como nombre@empresa.com.mx.";
     public const string MensajePegadoRechazado = "No se pegó: la contraseña no puede empezar con un espacio ni con caracteres vacíos. Cópiala sin ellos.";
     public const int LongitudMaximaCodigoEvento = 40;
     public const int LongitudMaximaCorreo = 40;
@@ -77,7 +79,13 @@ public static partial class Validaciones
     [GeneratedRegex(@"\A\p{L}\p{M}*(?:[\p{L}\p{M} .'-])*\z", RegexOptions.None, MilisegundosMaximosRegex)]
     private static partial Regex ExpresionNombre();
 
-    [GeneratedRegex(@"\A[^@\s""<>,;:()\[\]\\]+@[^@\s""<>,;:()\[\]\\]+\.[^@\s""<>,;:()\[\]\\]+\z", RegexOptions.None, MilisegundosMaximosRegex)]
+    // Un dominio de correo termina en un código de país de dos letras (mx, es, us...) o en uno de estos finales.
+    private static readonly HashSet<string> FinalesGenericosDeDominio = new HashSet<string> { "com", "net", "org", "edu", "gob", "gov", "info", "biz" };
+
+    // Parte local: letras, números y . _ % + - (el punto no va al inicio, al final ni repetido).
+    // Dominio: etiquetas de letras, números y guiones (sin guion al inicio ni al final) separadas por puntos,
+    // con un final de solo letras. Qué finales se aceptan lo decide EsCorreoValido.
+    [GeneratedRegex(@"\A[A-Za-z0-9_%+-]+(?:\.[A-Za-z0-9_%+-]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+[A-Za-z]{2,}\z", RegexOptions.None, MilisegundosMaximosRegex)]
     private static partial Regex ExpresionCorreo();
 
     [GeneratedRegex(@"\A[a-z]+\.[a-z]{2,}@uanl\.edu\.mx\z", RegexOptions.None, MilisegundosMaximosRegex)]
@@ -145,10 +153,20 @@ public static partial class Validaciones
         return matricula != null && matricula.Length == LongitudMatricula && matricula.All(char.IsAsciiDigit);
     }
 
-    /// <summary>Correo con formato texto@dominio.ext, de hasta 40 caracteres.</summary>
+    /// <summary>
+    /// Correo de hasta 40 caracteres, con la forma texto@dominio y un dominio de estructura real: gmail.com, outlook.com,
+    /// hotmail.com, uanl.edu.mx, empresa.com.mx... El dominio debe terminar en un código de país de dos letras
+    /// (mx, es, us...) o en com, net, org, edu, gob, gov, info o biz: así "gmail.mxmxmx" se rechaza.
+    /// </summary>
     public static bool EsCorreoValido(string? correo)
     {
-        return string.IsNullOrEmpty(correo) == false && correo.Length <= LongitudMaximaCorreo && ExpresionCorreo().IsMatch(correo);
+        if (string.IsNullOrEmpty(correo) || correo.Length > LongitudMaximaCorreo || ExpresionCorreo().IsMatch(correo) == false)
+        {
+            return false;
+        }
+
+        string finalDelDominio = correo.Substring(correo.LastIndexOf('.') + 1).ToLowerInvariant();
+        return finalDelDominio.Length == 2 || FinalesGenericosDeDominio.Contains(finalDelDominio);
     }
 
     /// <summary>
@@ -186,7 +204,7 @@ public static partial class Validaciones
         return string.IsNullOrEmpty(codigo) == false && codigo.Length <= LongitudMaximaCodigoEvento && ExpresionCodigoEvento().IsMatch(codigo);
     }
 
-    /// <summary>Texto libre (motivo, título, ubicación): con límite de largo, sin caracteres de control y sin vacíos al inicio.</summary>
+    /// <summary>Texto libre (motivo, título): con límite de largo, sin caracteres de control y sin vacíos al inicio.</summary>
     public static bool EsTextoLibreValido(string? texto)
     {
         return texto != null && texto.Length <= LongitudMaximaTextoLibre && texto.Any(char.IsControl) == false

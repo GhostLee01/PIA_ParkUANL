@@ -24,6 +24,7 @@ public sealed partial class PestanaEventos : UserControl
         {
             CampoFormulario.Codigo => cajaCodigo,
             CampoFormulario.Titulo => cajaTitulo,
+            CampoFormulario.Ubicacion => comboUbicacion,
             CampoFormulario.Reservados => numeroReservados,
             CampoFormulario.MaximoVisitantes => numeroMaxVisitantes,
             CampoFormulario.VigenciaHoras => numeroVigencia,

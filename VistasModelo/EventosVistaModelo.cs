@@ -27,7 +27,7 @@ public sealed partial class EventosVistaModelo : VistaModeloBase, IPestanaDelPan
     private const int VigenciaInicial = 12;
     private const int HoraDeInicioSugerida = 9;
     private const int HoraDeFinSugerida = 18;
-    private const string UbicacionSugerida = "FACPYA";
+    private const string UbicacionSugerida = Estacionamientos.Facpya;
 
     private readonly IDialogos dialogos;
     private readonly IPortapapeles portapapeles;
@@ -38,6 +38,7 @@ public sealed partial class EventosVistaModelo : VistaModeloBase, IPestanaDelPan
     public double LimiteVisitantes { get; } = ServicioEventos.MaximoVisitantes;
     public double MinimoVigencia { get; } = ServicioEventos.MinimoVigenciaHoras;
     public double LimiteVigencia { get; } = ServicioEventos.MaximoVigenciaHoras;
+    public IReadOnlyList<string> OpcionesDeUbicacion { get; } = Estacionamientos.Todos;
 
     [ObservableProperty]
     private IReadOnlyList<FilaTabla> eventos = Array.Empty<FilaTabla>();
@@ -60,8 +61,9 @@ public sealed partial class EventosVistaModelo : VistaModeloBase, IPestanaDelPan
     [NotifyCanExecuteChangedFor(nameof(GuardarCambiosCommand))]
     private string titulo = "";
 
+    /// <summary>FACPYA o Estadio; null si no hay ninguna elegida (un evento guardado con otro texto).</summary>
     [ObservableProperty]
-    private string ubicacion = "";
+    private string? ubicacion;
 
     [ObservableProperty]
     private DateTime inicio;
@@ -167,7 +169,7 @@ public sealed partial class EventosVistaModelo : VistaModeloBase, IPestanaDelPan
         {
             Codigo = evento.Codigo;
             Titulo = evento.Titulo;
-            Ubicacion = evento.Ubicacion;
+            Ubicacion = ReglasEventos.InterpretarUbicacionAntigua(evento.Ubicacion);
             Inicio = evento.FechaInicio;
             Fin = evento.FechaFin;
             Reservados = Math.Clamp(evento.LugaresReservadosFacpya, 0, CalculadoraAforo.CapacidadFacpya);
@@ -208,7 +210,7 @@ public sealed partial class EventosVistaModelo : VistaModeloBase, IPestanaDelPan
 
     private DatosEvento LeerDatos()
     {
-        return new DatosEvento(Codigo, Titulo, Ubicacion, Inicio, Fin, LeerEntero(Reservados), LeerEntero(MaximoVisitantes), LeerEntero(VigenciaHoras), PermiteReingreso == true);
+        return new DatosEvento(Codigo, Titulo, Ubicacion ?? "", Inicio, Fin, LeerEntero(Reservados), LeerEntero(MaximoVisitantes), LeerEntero(VigenciaHoras), PermiteReingreso == true);
     }
 
     private bool PuedeCrear()

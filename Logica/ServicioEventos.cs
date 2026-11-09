@@ -32,7 +32,7 @@ public static class ServicioEventos
         bool esNuevo = eventoExistente == null;
         string codigo = datos.Codigo.Trim().ToLowerInvariant();
         string titulo = datos.Titulo.Trim();
-        string ubicacion = datos.Ubicacion.Trim();
+        string? ubicacion = ReglasEventos.BuscarUbicacionValida(datos.Ubicacion);
 
         if (Validaciones.EsCodigoEventoValido(codigo) == false)
         {
@@ -47,9 +47,9 @@ public static class ServicioEventos
         {
             return new ResultadoValidacion("El título admite hasta " + Validaciones.LongitudMaximaNombre + " caracteres.", CampoFormulario.Titulo);
         }
-        if (ubicacion.Length > Validaciones.LongitudMaximaNombre || Validaciones.EsTextoLibreValido(ubicacion) == false)
+        if (ubicacion == null)
         {
-            return new ResultadoValidacion("La ubicación admite hasta " + Validaciones.LongitudMaximaNombre + " caracteres.", CampoFormulario.Titulo);
+            return new ResultadoValidacion("Elige la ubicación del evento: " + string.Join(" o ", Estacionamientos.Todos) + ".", CampoFormulario.Ubicacion);
         }
         if (datos.Fin <= datos.Inicio)
         {
@@ -277,7 +277,7 @@ public static class ServicioEventos
         }
         if (correo != "" && Validaciones.EsCorreoValido(correo) == false)
         {
-            return new ResultadoValidacion("El correo del visitante no tiene un formato válido.", CampoFormulario.Correo);
+            return new ResultadoValidacion(Validaciones.MensajeCorreoInvalido, CampoFormulario.Correo);
         }
         if (ReglasEventos.PlacaYaTienePase(evento, placa, ahora))
         {

@@ -49,8 +49,9 @@
                         <TextBox x:Name="cajaTitulo" Grid.Row="1" Grid.Column="1" MaxLength="{x:Bind local:Validaciones.LongitudMaximaNombre}"
                                  Text="{x:Bind Vista.Titulo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <TextBlock Grid.Row="2" Text="Ubicación" Style="{StaticResource EtiquetaCentrada}" />
-                        <TextBox x:Name="cajaUbicacion" Grid.Row="2" Grid.Column="1" MaxLength="{x:Bind local:Validaciones.LongitudMaximaNombre}"
-                                 Text="{x:Bind Vista.Ubicacion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <ComboBox x:Name="comboUbicacion" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" PlaceholderText="Elige FACPYA o Estadio"
+                                  ItemsSource="{x:Bind Vista.OpcionesDeUbicacion}"
+                                  SelectedItem="{x:Bind Vista.Ubicacion, Mode=TwoWay, Converter={StaticResource ATextoOpcional}}" />
                         <TextBlock Grid.Row="3" Text="Inicio" Style="{StaticResource EtiquetaCentrada}" />
                         <local:SelectorFecha x:Name="selectorInicio" Grid.Row="3" Grid.Column="1" MostrarHora="True" Valor="{x:Bind Vista.Inicio, Mode=TwoWay}" />
                         <TextBlock Grid.Row="4" Text="Fin" Style="{StaticResource EtiquetaCentrada}" />
@@ -112,7 +113,7 @@
                                      IsReadOnly="{x:Bind Vista.CamposDelPaseBloqueados, Mode=OneWay}"
                                      Text="{x:Bind Vista.NombreVisitante, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBlock Grid.Row="1" Text="Correo" Style="{StaticResource EtiquetaCentrada}" />
-                            <TextBox x:Name="cajaPaseCorreo" Grid.Row="1" Grid.Column="1" MaxLength="{x:Bind local:Validaciones.LongitudMaximaCorreo}"
+                            <TextBox x:Name="cajaPaseCorreo" Grid.Row="1" Grid.Column="1" MaxLength="{x:Bind local:Validaciones.LongitudMaximaCorreo}" PlaceholderText="Opcional. Ej.: nombre@gmail.com"
                                      IsReadOnly="{x:Bind Vista.CamposDelPaseBloqueados, Mode=OneWay}"
                                      Text="{x:Bind Vista.CorreoVisitante, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBlock Grid.Row="2" Text="Placa" Style="{StaticResource EtiquetaCentrada}" />

@@ -56,4 +56,25 @@ public static class ReglasEventos
         return GestorArchivos.Pases.Any(pase => pase.CodigoEvento == evento.Codigo && pase.ObtenerEstado(ahora) == EstadosDePase.Activo
                                                 && Validaciones.EsMismaPlaca(pase.Placa, placa));
     }
+
+    /// <summary>
+    /// La ubicación de un evento es un estacionamiento (FACPYA o Estadio), no un texto libre.
+    /// Regresa el nombre oficial, sin importar mayúsculas ni espacios a los lados, o null si no es ninguno.
+    /// </summary>
+    public static string? BuscarUbicacionValida(string? ubicacion)
+    {
+        string buscada = (ubicacion ?? "").Trim();
+        return Estacionamientos.Todos.FirstOrDefault(lugar => string.Equals(lugar, buscada, StringComparison.OrdinalIgnoreCase));
+    }
+
+    /// <summary>
+    /// Para mostrar un evento guardado cuando la ubicación era un texto libre: "Aula Magna FACPYA" se muestra como FACPYA.
+    /// Regresa null si el texto no menciona ningún estacionamiento (por ejemplo "Mi casa"): la lista queda sin elegir
+    /// y hay que elegir uno antes de guardar.
+    /// </summary>
+    public static string? InterpretarUbicacionAntigua(string? texto)
+    {
+        string contenido = texto ?? "";
+        return Estacionamientos.Todos.FirstOrDefault(lugar => contenido.Contains(lugar, StringComparison.OrdinalIgnoreCase));
+    }
 }
